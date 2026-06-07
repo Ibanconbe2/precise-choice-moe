@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta http-equiv="Content-Security-Policy" content="frame-ancestors *;">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Precise Choice — Ecosistema Orientado al Mercado</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #0F0F0F;
+    --white: #FAFAFA;
+    --orange: #1A6BE8;
+    --orange-light: #EBF1FD;
+    --gray-100: #F5F5F5;
+    --gray-200: #E8E8E8;
+    --gray-400: #9E9E9E;
+    --gray-600: #616161;
+    --gray-800: #2E2E2E;
+    --serif: 'Playfair Display', Georgia, serif;
+    --sans: 'DM Sans', system-ui, sans-serif;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--sans);
+    background: var(--white);
+    color: var(--black);
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(250,250,250,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--gray-200);
+    padding: 0 2rem;
+    height: 60px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .nav-logo {
+    font-family: var(--serif);
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--black);
+    letter-spacing: 0.01em;
+  }
+  .nav-logo span { color: var(--orange); }
+  .nav-links {
+    display: flex; gap: 2rem; list-style: none;
+  }
+  .nav-links a {
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--gray-600);
+    text-decoration: none;
+    letter-spacing: 0.02em;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--orange); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 6rem 2rem 4rem;
+    max-width: 1100px;
+    margin: 0 auto;
+    position: relative;
+  }
+  .hero-eyebrow {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--orange);
+    margin-bottom: 1.5rem;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .hero-eyebrow::before {
+    content: '';
+    width: 32px; height: 1px;
+    background: var(--orange);
+  }
+  .hero-title {
+    font-family: var(--serif);
+    font-size: clamp(3rem, 7vw, 6.5rem);
+    font-weight: 700;
+    line-height: 1.05;
+    color: var(--black);
+    margin-bottom: 2rem;
+    max-width: 800px;
+  }
+  .hero-title em {
+    font-style: italic;
+    color: var(--orange);
+  }
+  .hero-subtitle {
+    font-size: 18px;
+    font-weight: 300;
+    color: var(--gray-600);
+    max-width: 560px;
+    line-height: 1.7;
+    margin-bottom: 3rem;
+  }
+  .hero-cta {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: var(--black);
+    color: var(--white);
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    padding: 14px 28px;
+    text-decoration: none;
+    transition: background 0.2s, gap 0.2s;
+  }
+  .hero-cta:hover { background: var(--orange); gap: 16px; }
+  .hero-cta-arrow { font-size: 18px; }
+
+  .hero-stats {
+    display: flex; gap: 3rem; flex-wrap: wrap;
+    margin-top: 5rem;
+    padding-top: 3rem;
+    border-top: 1px solid var(--gray-200);
+  }
+  .hero-stat-num {
+    font-family: var(--serif);
+    font-size: 2.5rem;
+    font-weight: 600;
+    color: var(--black);
+    line-height: 1;
+    margin-bottom: 0.3rem;
+  }
+  .hero-stat-num span { color: var(--orange); }
+  .hero-stat-label {
+    font-size: 12px;
+    font-weight: 400;
+    color: var(--gray-400);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  /* SECTION BASE */
+  section { padding: 6rem 2rem; }
+  .container { max-width: 1100px; margin: 0 auto; }
+  .section-eyebrow {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--orange);
+    margin-bottom: 1rem;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .section-eyebrow::before {
+    content: '';
+    width: 24px; height: 1px;
+    background: var(--orange);
+  }
+  .section-title {
+    font-family: var(--serif);
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    font-weight: 700;
+    line-height: 1.15;
+    color: var(--black);
+    margin-bottom: 1.5rem;
+  }
+  .section-body {
+    font-size: 16px;
+    font-weight: 300;
+    color: var(--gray-600);
+    line-height: 1.8;
+    max-width: 640px;
+  }
+
+  /* OBJETIVO ECOSISTEMA */
+  .objetivo-section { background: var(--gray-100); }
+  .objetivo-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: center;
+    margin-top: 3rem;
+  }
+  .objetivo-quote {
+    font-family: var(--serif);
+    font-size: clamp(1.4rem, 2.5vw, 2rem);
+    font-weight: 400;
+    font-style: italic;
+    color: var(--black);
+    line-height: 1.5;
+    padding-left: 2rem;
+    border-left: 3px solid var(--orange);
+  }
+  .objetivo-pillars {
+    display: flex; flex-direction: column; gap: 1.25rem;
+  }
+  .pillar {
+    display: flex; gap: 1rem; align-items: flex-start;
+  }
+  .pillar-num {
+    font-family: var(--serif);
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--orange);
+    flex-shrink: 0;
+    width: 28px;
+  }
+  .pillar-text { font-size: 14px; color: var(--gray-800); line-height: 1.6; }
+  .pillar-text strong { color: var(--black); font-weight: 500; display: block; margin-bottom: 2px; }
+
+  /* MOE ELEMENTOS */
+  .moe-section { background: var(--white); }
+  .moe-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1px;
+    background: var(--gray-200);
+    border: 1px solid var(--gray-200);
+    margin-top: 3.5rem;
+  }
+  .moe-card {
+    background: var(--white);
+    padding: 2.5rem;
+    text-decoration: none;
+    color: inherit;
+    position: relative;
+    overflow: hidden;
+    transition: background 0.25s;
+    display: block;
+  }
+  .moe-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--orange);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s;
+  }
+  .moe-card:hover { background: var(--orange-light); }
+  .moe-card:hover::after { transform: scaleX(1); }
+  .moe-card-num {
+    font-family: var(--serif);
+    font-size: 3.5rem;
+    font-weight: 700;
+    color: var(--gray-200);
+    line-height: 1;
+    margin-bottom: .75rem;
+    transition: color 0.25s;
+  }
+  .moe-card:hover .moe-card-num { color: var(--orange); opacity: 0.3; }
+  .moe-card-label {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--orange);
+    margin-bottom: .5rem;
+  }
+  .moe-card-title {
+    font-family: var(--serif);
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: var(--black);
+    margin-bottom: .75rem;
+    line-height: 1.2;
+  }
+  .moe-card-body {
+    font-size: 13px;
+    color: var(--gray-600);
+    line-height: 1.65;
+    margin-bottom: 1.25rem;
+  }
+  .moe-card-cta {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--black);
+    letter-spacing: 0.05em;
+    display: flex; align-items: center; gap: 6px;
+  }
+  .moe-card:hover .moe-card-cta { color: var(--orange); }
+
+  /* EMPRESA */
+  .empresa-section { background: var(--black); color: var(--white); }
+  .empresa-section .section-title { color: var(--white); }
+  .empresa-section .section-body { color: rgba(255,255,255,0.6); }
+  .empresa-data {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px,1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+    padding-top: 3rem;
+    border-top: 1px solid rgba(255,255,255,0.1);
+  }
+  .empresa-data-item {}
+  .empresa-data-label {
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--orange);
+    margin-bottom: .5rem;
+  }
+  .empresa-data-value {
+    font-family: var(--serif);
+    font-size: 1.1rem;
+    font-weight: 400;
+    color: var(--white);
+    line-height: 1.4;
+  }
+
+  /* EQUIPO / AUTORES */
+  .autores-section { background: var(--gray-100); }
+  .autores-intro { max-width: 600px; margin-bottom: 3rem; }
+  .autores-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1.5rem;
+  }
+  .autor-card {
+    background: var(--white);
+    padding: 1.5rem;
+    border: 1px solid var(--gray-200);
+  }
+  .autor-initial {
+    width: 44px; height: 44px;
+    background: var(--orange);
+    color: var(--white);
+    font-family: var(--serif);
+    font-size: 1.2rem;
+    font-weight: 600;
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 1rem;
+  }
+  .autor-name { font-size: 14px; font-weight: 500; color: var(--black); margin-bottom: .2rem; }
+  .autor-role { font-size: 12px; color: var(--gray-400); }
+
+  /* FOOTER */
+  footer {
+    background: var(--white);
+    border-top: 1px solid var(--gray-200);
+    padding: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  .footer-brand {
+    font-family: var(--serif);
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--black);
+  }
+  .footer-brand span { color: var(--orange); }
+  .footer-note { font-size: 12px; color: var(--gray-400); }
+
+  /* SCROLL REVEAL */
+  .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .reveal.visible { opacity: 1; transform: none; }
+
+  @media (max-width: 768px) {
+    .objetivo-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    .nav-links { display: none; }
+    .hero-stats { gap: 2rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo"><svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:inline-block;vertical-align:middle;margin-right:8px">
+  <rect width="32" height="32" rx="6" fill="#1A6BE8"/>
+  <path d="M8 8h7c2.8 0 4.5 1.8 4.5 4.2 0 2.4-1.7 4.2-4.5 4.2H11v5.6H8V8zm3 2.4v3.6h3.8c1.2 0 1.9-.7 1.9-1.8 0-1.1-.7-1.8-1.9-1.8H11z" fill="white"/>
+  <path d="M20 8h3.5c3 0 5.5 2.4 5.5 6s-2.5 6-5.5 6H20V8zm3 2.4v7.2h.5c1.7 0 2.8-1.3 2.8-3.6s-1.1-3.6-2.8-3.6H23z" fill="rgba(255,255,255,0.7)"/>
+</svg><span style="font-family:var(--serif);font-size:15px;font-weight:600;color:var(--black)">Precise <span style="color:#1A6BE8">Choice</span></span></div>
+  <ul class="nav-links">
+    <li><a href="#objetivo">Objetivo</a></li>
+    <li><a href="#ecosistema">Ecosistema</a></li>
+    <li><a href="#empresa">Empresa</a></li>
+    <li><a href="07-propuestas.html">Propuestas</a></li><li><a href="08-justificacion.html">Justificación</a></li><li><a href="#autores">Equipo</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <p class="hero-eyebrow">Propuesta de transformación organizacional · 2026</p>
+  <h1 class="hero-title">Ecosistema<br><em>Orientado al</em><br>Mercado</h1>
+  <p class="hero-subtitle">Una propuesta integral para reinventar Precise Choice como organización ágil, innovadora y profundamente orientada al cliente.</p>
+  <a href="#ecosistema" class="hero-cta">
+    Explorar la propuesta
+    <span class="hero-cta-arrow">→</span>
+  </a>
+  <div class="hero-stats">
+    <div>
+      <div class="hero-stat-num">6<span>+</span></div>
+      <div class="hero-stat-label">Elementos MOE analizados</div>
+    </div>
+    <div>
+      <div class="hero-stat-num">53</div>
+      <div class="hero-stat-label">Colaboradores encuestados</div>
+    </div>
+    <div>
+      <div class="hero-stat-num">35<span>+</span></div>
+      <div class="hero-stat-label">Años de trayectoria</div>
+    </div>
+    <div>
+      <div class="hero-stat-num">5</div>
+      <div class="hero-stat-label">Células propuestas</div>
+    </div>
+  </div>
+</div>
+
+<!-- OBJETIVO -->
+<section class="objetivo-section" id="objetivo">
+  <div class="container">
+    <p class="section-eyebrow reveal">Objetivo del ecosistema</p>
+    <h2 class="section-title reveal">¿Por qué reinventarse?</h2>
+    <div class="objetivo-grid">
+      <div class="reveal">
+        <p class="objetivo-quote">"Conservar el ADN de la marca y migrar de un liderazgo que centraliza a uno que construye sistemas y forma a quienes lo van a operar."</p>
+        <p style="font-size:12px;color:var(--gray-400);margin-top:1rem;padding-left:2rem">— Precise Choice, entrevista institucional 2026</p>
+      </div>
+      <div class="objetivo-pillars reveal">
+        <p style="font-size:14px;color:var(--gray-600);margin-bottom:1.25rem;line-height:1.7">El ecosistema MOE de Precise Choice tiene un objetivo claro: transformar la organización para que pueda anticipar y responder al mercado con agilidad, sin depender de una o dos personas clave.</p>
+        <div class="pillar">
+          <span class="pillar-num">01</span>
+          <div class="pillar-text"><strong>Institucionalizar el liderazgo</strong>Migrar de un modelo centralizado a uno distribuido, con derechos de decisión claros por rol.</div>
+        </div>
+        <div class="pillar">
+          <span class="pillar-num">02</span>
+          <div class="pillar-text"><strong>Activar células ágiles</strong>Transformar los equipos funcionales en células autónomas orientadas a resultados de mercado.</div>
+        </div>
+        <div class="pillar">
+          <span class="pillar-num">03</span>
+          <div class="pillar-text"><strong>Fortalecer capacidades</strong>Desarrollar la obsesión por el cliente, la innovación constante y la agilidad como capacidades organizacionales.</div>
+        </div>
+        <div class="pillar">
+          <span class="pillar-num">04</span>
+          <div class="pillar-text"><strong>Construir alianzas estratégicas</strong>Integrar al ecosistema los aliados que hoy faltan: marketplaces D2C, socios de IA/IoT y comunidades de usuarios.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ECOSISTEMA MOE -->
+<section class="moe-section" id="ecosistema">
+  <div class="container">
+    <p class="section-eyebrow reveal">Modelo MOE · 6 elementos</p>
+    <h2 class="section-title reveal">El ecosistema en detalle</h2>
+    <p class="section-body reveal">Cada elemento del Modelo de Orientación al Mercado ha sido evaluado con base en información real de Precise Choice. Explora cada dimensión para conocer el diagnóstico y la propuesta de transformación.</p>
+    <div class="moe-grid reveal">
+      <a href="01-entorno.html" class="moe-card">
+        <div class="moe-card-num">01</div>
+        <div class="moe-card-label">Elemento MOE</div>
+        <h3 class="moe-card-title">Entorno</h3>
+        <p class="moe-card-body">Cómo Precise Choice entiende y anticipa las condiciones cambiantes de su mercado y qué debe cambiar en su lectura estratégica del entorno.</p>
+        <span class="moe-card-cta">Ver análisis →</span>
+      </a>
+      <a href="02-estrategia.html" class="moe-card">
+        <div class="moe-card-num">02</div>
+        <div class="moe-card-label">Elemento MOE</div>
+        <h3 class="moe-card-title">Estrategia</h3>
+        <p class="moe-card-body">Evaluación de la claridad estratégica, la comunicación de visión y la hoja de ruta para los próximos 36 meses de transformación.</p>
+        <span class="moe-card-cta">Ver análisis →</span>
+      </a>
+      <a href="03-capacidad.html" class="moe-card">
+        <div class="moe-card-num">03</div>
+        <div class="moe-card-label">Elemento MOE</div>
+        <h3 class="moe-card-title">Capacidad</h3>
+        <p class="moe-card-body">Identificación de las capacidades impulsoras y limitantes del ecosistema: detección externa, obsesión por el cliente, innovación y agilidad.</p>
+        <span class="moe-card-cta">Ver análisis →</span>
+      </a>
+      <a href="04-morfologia.html" class="moe-card">
+        <div class="moe-card-num">04</div>
+        <div class="moe-card-label">Elemento MOE</div>
+        <h3 class="moe-card-title">Morfología</h3>
+        <p class="moe-card-body">Diseño de la nueva estructura organizacional: plataforma habilitadora, células ágiles de valor y aliados estratégicos que el SF necesita incorporar.</p>
+        <span class="moe-card-cta">Ver análisis →</span>
+      </a>
+      <a href="05-gobernanza.html" class="moe-card">
+        <div class="moe-card-num">05</div>
+        <div class="moe-card-label">Elemento MOE</div>
+        <h3 class="moe-card-title">Gobernanza</h3>
+        <p class="moe-card-body">Los 6 mecanismos de gobernanza evaluados y el modelo dinámico de transformación organizacional en 5 fases adaptado a Precise Choice.</p>
+        <span class="moe-card-cta">Ver análisis →</span>
+      </a>
+      <a href="06-liderazgo.html" class="moe-card">
+        <div class="moe-card-num">06</div>
+        <div class="moe-card-label">Elemento MOE</div>
+        <h3 class="moe-card-title">Liderazgo</h3>
+        <p class="moe-card-body">Resultados de la encuesta de liderazgo transformacional aplicada a 53 colaboradores y las dos líneas de acción propuestas para el desarrollo de líderes.</p>
+        <span class="moe-card-cta">Ver análisis →</span>
+      </a>
+      <a href="07-propuestas.html" class="moe-card">
+        <div class="moe-card-num">PT</div>
+        <div class="moe-card-label">Propuestas</div>
+        <h3 class="moe-card-title">Transformación</h3>
+        <p class="moe-card-body">Propuesta de cambio cultural y dos líneas de acción para el desarrollo de habilidades de liderazgo basadas en los hallazgos del diagnóstico MOE.</p>
+        <span class="moe-card-cta">Ver propuestas →</span>
+      </a>
+      <a href="08-justificacion.html" class="moe-card">
+        <div class="moe-card-num">JT</div>
+        <div class="moe-card-label">Justificación</div>
+        <h3 class="moe-card-title">¿Por qué ahora?</h3>
+        <p class="moe-card-body">Los argumentos, datos y perspectivas de expertos que justifican por qué implementar el ecosistema MOE es urgente, viable y rentable para Precise Choice.</p>
+        <span class="moe-card-cta">Ver justificación →</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- EMPRESA -->
+<section class="empresa-section" id="empresa">
+  <div class="container">
+    <p class="section-eyebrow reveal" style="color:var(--orange)">Socio formador</p>
+    <h2 class="section-title reveal">Precise Choice</h2>
+    <p class="section-body reveal">Empresa 100% mexicana, pionera en accesorios de cómputo en Latinoamérica. Hoy, una empresa en plena transformación hacia la nueva era de la tecnología de consumo.</p>
+    <div class="empresa-data reveal">
+      <div class="empresa-data-item">
+        <div class="empresa-data-label">Fundación</div>
+        <div class="empresa-data-value">1992, Guadalajara, Jalisco</div>
+      </div>
+      <div class="empresa-data-item">
+        <div class="empresa-data-label">Misión</div>
+        <div class="empresa-data-value">Hacer que las personas disfruten de la tecnología</div>
+      </div>
+      <div class="empresa-data-item">
+        <div class="empresa-data-label">Visión</div>
+        <div class="empresa-data-value">Ser el proveedor preferido, reconocidos por generar valor con agilidad</div>
+      </div>
+      <div class="empresa-data-item">
+        <div class="empresa-data-label">Campus</div>
+        <div class="empresa-data-value">80,500 m² · Santa Anita, Jalisco</div>
+      </div>
+      <div class="empresa-data-item">
+        <div class="empresa-data-label">Marcas</div>
+        <div class="empresa-data-value">Precise Choice · Vortred · Easyline</div>
+      </div>
+      <div class="empresa-data-item">
+        <div class="empresa-data-label">Presencia</div>
+        <div class="empresa-data-value">Cobertura nacional · Walmart, Liverpool, Coppel y más</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AUTORES -->
+<section class="autores-section" id="autores">
+  <div class="container">
+    <p class="section-eyebrow reveal">Tec de Monterrey · 2026</p>
+    <h2 class="section-title reveal">Equipo de trabajo</h2>
+    <div class="autores-intro reveal">
+      <p class="section-body">Propuesta desarrollada como parte del reto de Liderazgo para la Transformación en colaboración con Precise Choice como Socio Formador.</p>
+    </div>
+    <div class="autores-grid reveal">
+      <div class="autor-card">
+        <div class="autor-initial">A</div>
+        <div class="autor-name">Nombre del integrante</div>
+        <div class="autor-role">Tec de Monterrey</div>
+      </div>
+      <div class="autor-card">
+        <div class="autor-initial">B</div>
+        <div class="autor-name">Nombre del integrante</div>
+        <div class="autor-role">Tec de Monterrey</div>
+      </div>
+      <div class="autor-card">
+        <div class="autor-initial">C</div>
+        <div class="autor-name">Nombre del integrante</div>
+        <div class="autor-role">Tec de Monterrey</div>
+      </div>
+      <div class="autor-card">
+        <div class="autor-initial">D</div>
+        <div class="autor-name">Nombre del integrante</div>
+        <div class="autor-role">Tec de Monterrey</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">Perfect <span>Choice</span> · Ecosistema MOE 2026</div>
+  <div class="footer-note">Tecnológico de Monterrey · Liderazgo para la Transformación</div>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>

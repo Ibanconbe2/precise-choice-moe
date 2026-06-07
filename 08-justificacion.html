@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta http-equiv="Content-Security-Policy" content="frame-ancestors *;">
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Justificación — Precise Choice MOE</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root{--black:#0F0F0F;--white:#FAFAFA;--orange:#1A6BE8;--orange-light:#EBF1FD;--gray-100:#F5F5F5;--gray-200:#E8E8E8;--gray-400:#9E9E9E;--gray-600:#616161;--gray-800:#2E2E2E;--serif:'Playfair Display',Georgia,serif;--sans:'DM Sans',system-ui,sans-serif}
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:var(--sans);background:var(--white);color:var(--black);line-height:1.6;overflow-x:hidden}
+  nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(250,250,250,0.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--gray-200);padding:0 2rem;height:60px;display:flex;align-items:center;justify-content:space-between}
+  .nav-logo{font-family:var(--serif);font-size:15px;font-weight:600;color:var(--black);text-decoration:none}.nav-logo span{color:var(--orange)}
+  .nav-back{font-size:13px;color:var(--gray-600);text-decoration:none;display:flex;align-items:center;gap:6px;transition:color .2s}.nav-back:hover{color:var(--orange)}
+  .page-hero{padding:8rem 2rem 5rem;max-width:1100px;margin:0 auto}
+  .eyebrow{font-size:11px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--orange);margin-bottom:1rem;display:flex;align-items:center;gap:10px}.eyebrow::before{content:'';width:24px;height:1px;background:var(--orange)}
+  .page-title{font-family:var(--serif);font-size:clamp(2.5rem,6vw,5rem);font-weight:700;line-height:1.05;margin-bottom:1.5rem}.page-title em{font-style:italic;color:var(--orange)}
+  .page-intro{font-size:17px;font-weight:300;color:var(--gray-600);max-width:640px;line-height:1.8}
+  .num-badge{font-family:var(--serif);font-size:8rem;font-weight:700;color:var(--gray-200);line-height:1;float:right;margin-left:2rem;margin-top:-1rem}
+  section{padding:4.5rem 2rem}.container{max-width:1100px;margin:0 auto}
+  .section-label{font-size:11px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--orange);margin-bottom:.75rem}
+  .section-title{font-family:var(--serif);font-size:clamp(1.6rem,3vw,2.4rem);font-weight:600;color:var(--black);margin-bottom:1.25rem;line-height:1.2}
+  .body-text{font-size:15px;font-weight:300;color:var(--gray-600);line-height:1.8;margin-bottom:1.5rem}
+  .alt-section{background:var(--gray-100)}.dark-section{background:var(--black);color:var(--white)}
+  .dark-section .section-title{color:var(--white)}.dark-section .body-text{color:rgba(255,255,255,.6)}
+
+  /* ESTADÍSTICAS HERO */
+  .stats-band{background:var(--orange);padding:3rem 2rem}
+  .stats-band .container{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:2rem}
+  .stat-item{text-align:center}
+  .stat-num{font-family:var(--serif);font-size:3rem;font-weight:700;color:var(--white);line-height:1;margin-bottom:.3rem}
+  .stat-label{font-size:12px;color:rgba(255,255,255,.8);line-height:1.4;text-align:center}
+  .stat-source{font-size:10px;color:rgba(255,255,255,.5);margin-top:.3rem}
+
+  /* RAZONES */
+  .razon{display:grid;grid-template-columns:80px 1fr;gap:2rem;padding:3rem 0;border-bottom:1px solid var(--gray-200);align-items:start}
+  .razon:last-child{border-bottom:none}
+  .razon-num{font-family:var(--serif);font-size:4rem;font-weight:700;color:var(--gray-200);line-height:1;text-align:center}
+  .razon-content{}
+  .razon-title{font-family:var(--serif);font-size:1.4rem;font-weight:600;color:var(--black);margin-bottom:.75rem;line-height:1.25}
+  .razon-body{font-size:14px;color:var(--gray-600);line-height:1.8;margin-bottom:1rem}
+  .dato-box{background:var(--orange-light);border-left:3px solid var(--orange);padding:1rem 1.25rem;display:flex;gap:1rem;align-items:flex-start}
+  .dato-icon{font-size:1.2rem;flex-shrink:0;margin-top:.1rem}
+  .dato-text{font-size:13px;color:var(--gray-800);line-height:1.65}
+  .dato-source{font-size:11px;color:var(--gray-400);margin-top:.3rem;font-style:italic}
+
+  /* EXPERTOS */
+  .expert-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;margin-top:1.5rem}
+  .expert-card{border:1px solid var(--gray-200);padding:1.75rem}
+  .expert-quote{font-family:var(--serif);font-size:1rem;font-style:italic;color:var(--black);line-height:1.6;margin-bottom:1rem;padding-left:1rem;border-left:2px solid var(--orange)}
+  .expert-name{font-size:13px;font-weight:500;color:var(--black)}
+  .expert-role{font-size:12px;color:var(--gray-400)}
+
+  /* BENEFICIOS */
+  .benefit-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1px;background:var(--gray-200);border:1px solid var(--gray-200);margin-top:1.5rem}
+  .benefit-cell{background:var(--white);padding:2rem 1.5rem}
+  .benefit-icon{font-size:2rem;margin-bottom:.75rem}
+  .benefit-title{font-size:14px;font-weight:500;color:var(--black);margin-bottom:.4rem}
+  .benefit-body{font-size:13px;color:var(--gray-600);line-height:1.65}
+
+  /* CTA FINAL */
+  .cta-section{background:var(--black);padding:5rem 2rem;text-align:center}
+  .cta-title{font-family:var(--serif);font-size:clamp(2rem,5vw,3.5rem);font-weight:700;color:var(--white);line-height:1.1;margin-bottom:1.5rem}
+  .cta-title em{font-style:italic;color:var(--orange)}
+  .cta-body{font-size:16px;color:rgba(255,255,255,.6);max-width:560px;margin:0 auto 2.5rem;line-height:1.8}
+  .cta-link{display:inline-flex;align-items:center;gap:10px;background:var(--orange);color:var(--white);font-size:13px;font-weight:500;letter-spacing:.04em;padding:14px 28px;text-decoration:none;transition:opacity .2s}
+  .cta-link:hover{opacity:.85}
+
+  .reveal{opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .6s ease}.reveal.visible{opacity:1;transform:none}
+  footer{background:var(--white);border-top:1px solid var(--gray-200);padding:1.5rem 2rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem}
+  .footer-brand{font-family:var(--serif);font-size:14px;font-weight:600}.footer-brand span{color:var(--orange)}
+  .footer-nav{display:flex;gap:1.5rem}.footer-nav a{font-size:12px;color:var(--gray-400);text-decoration:none;transition:color .2s}.footer-nav a:hover{color:var(--orange)}
+  @media(max-width:640px){.razon{grid-template-columns:1fr;gap:1rem}.razon-num{font-size:2.5rem;text-align:left}}
+</style>
+</head>
+<body>
+<nav>
+  <a href="index.html" class="nav-logo"><svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:inline-block;vertical-align:middle;margin-right:8px">
+  <rect width="32" height="32" rx="6" fill="#1A6BE8"/>
+  <path d="M8 8h7c2.8 0 4.5 1.8 4.5 4.2 0 2.4-1.7 4.2-4.5 4.2H11v5.6H8V8zm3 2.4v3.6h3.8c1.2 0 1.9-.7 1.9-1.8 0-1.1-.7-1.8-1.9-1.8H11z" fill="white"/>
+  <path d="M20 8h3.5c3 0 5.5 2.4 5.5 6s-2.5 6-5.5 6H20V8zm3 2.4v7.2h.5c1.7 0 2.8-1.3 2.8-3.6s-1.1-3.6-2.8-3.6H23z" fill="rgba(255,255,255,0.7)"/>
+</svg><span style="font-family:var(--serif);font-size:15px;font-weight:600;color:var(--black)">Precise <span style="color:#1A6BE8">Choice</span></span></a>
+  <a href="index.html" class="nav-back">← Volver al inicio</a>
+</nav>
+
+<!-- HERO -->
+<div class="page-hero">
+  <span class="num-badge">JT</span>
+  <p class="eyebrow">Justificación de la propuesta</p>
+  <h1 class="page-title">¿Por qué<br><em>ahora</em>?</h1>
+  <p class="page-intro">La implementación del ecosistema MOE no es opcional para Precise Choice: es urgente. Aquí se presentan los argumentos, datos y perspectivas de expertos que justifican por qué esta transformación es necesaria, viable y rentable.</p>
+</div>
+
+<!-- DATOS CLAVE -->
+<div class="stats-band reveal">
+  <div class="container">
+    <div class="stat-item">
+      <div class="stat-num">1.4×</div>
+      <div class="stat-label">más probabilidades de superar a competidores en rentabilidad tienen las organizaciones centradas en las personas</div>
+      <div class="stat-source">Fuente: We Are Drew, 2025</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">28%</div>
+      <div class="stat-label">de aumento promedio en facturación anual logran las empresas mexicanas con presencia y madurez digital</div>
+      <div class="stat-source">Fuente: Grupo Sincro / El Economista, 2025</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">40%</div>
+      <div class="stat-label">de aumento en satisfacción del cliente logró una empresa retail mexicana al implementar liderazgo transformacional</div>
+      <div class="stat-source">Fuente: We Are Drew, 2025</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">35%</div>
+      <div class="stat-label">de crecimiento en ventas en 12 meses reportó la misma empresa tras adoptar valores compartidos y colaboración interárea</div>
+      <div class="stat-source">Fuente: We Are Drew, 2025</div>
+    </div>
+  </div>
+</div>
+
+<!-- 5 RAZONES -->
+<section>
+  <div class="container">
+    <p class="section-label reveal">Las 5 razones fundamentales</p>
+    <h2 class="section-title reveal">Por qué Precise Choice debe implementar este ecosistema</h2>
+
+    <div class="razon reveal">
+      <div class="razon-num">01</div>
+      <div class="razon-content">
+        <div class="razon-title">El mercado de electrónica de consumo está en reconfiguración acelerada</div>
+        <div class="razon-body">La electrónica de consumo es uno de los sectores de mayor crecimiento y dinamismo global. Las reglas de competencia están cambiando: los ciclos de producto se acortan, la IA está redefiniendo qué es un accesorio y los consumidores migran hacia canales directos. Las organizaciones que no desarrollan la capacidad de anticipar y responder rápido quedan atrapadas en un catálogo que envejece más rápido de lo que innova.</div>
+        <div class="dato-box">
+          <div class="dato-icon">📊</div>
+          <div>
+            <div class="dato-text">La electrónica de consumo fue uno de los tres sectores con mayor beneficio económico global entre 2005 y 2023, con un crecimiento de capitalización de mercado del 14% anual, frente al 5% del promedio de otras industrias. Las empresas que lideran en estos sectores de alta dinamicidad crecen el doble de rápido y tienen el triple de rentabilidad.</div>
+            <div class="dato-source">McKinsey Global Institute, "The next big arenas of competition", 2024–2026</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="razon reveal">
+      <div class="razon-num">02</div>
+      <div class="razon-content">
+        <div class="razon-title">La digitalización ya no es ventaja competitiva: es el piso mínimo</div>
+        <div class="razon-body">En México, el 95% de las PyMEs invirtió en digitalización durante 2024. La brecha ya no está entre quienes adoptan tecnología y quienes no: está entre quienes integran la tecnología con procesos y cultura organizacional, y quienes acumulan herramientas desconectadas. Precise Choice tiene la infraestructura física (campus, almacén, distribución) — lo que necesita es la infraestructura organizacional para operar con agilidad digital.</div>
+        <div class="dato-box">
+          <div class="dato-icon">📈</div>
+          <div>
+            <div class="dato-text">Las empresas mexicanas con presencia digital registran un aumento promedio del 28% en facturación anual, mientras que las que no han avanzado en este sentido apenas crecen un 8%. La diferencia es de 20 puntos porcentuales y se amplía cada año.</div>
+            <div class="dato-source">Grupo Sincro / El Economista, "Transformación digital en México 2025"</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="razon reveal">
+      <div class="razon-num">03</div>
+      <div class="razon-content">
+        <div class="razon-title">El liderazgo centralizado es el freno más costoso para el crecimiento</div>
+        <div class="razon-body">El diagnóstico de Precise Choice es claro: la concentración de decisiones en uno o dos líderes clave genera cuellos de botella que desaceleran la respuesta al mercado, desmotivan a los mandos medios y crean una vulnerabilidad sistémica — la empresa no puede operar sin esas personas. Esta no es solo una cuestión cultural: es un riesgo operativo y estratégico de primer orden que impide escalar.</div>
+        <div class="dato-box">
+          <div class="dato-icon">💡</div>
+          <div>
+            <div class="dato-text">Las organizaciones que invierten en rediseñar sus modelos operativos y construir culturas adaptativas logran mayor resiliencia, productividad y retención de talento. Las estructuras diseñadas por capacidades en lugar de jerarquías rígidas reducen la burocracia y aceleran la toma de decisiones significativamente. Según McKinsey y Mercer, este rediseño ya no es un lujo — es una necesidad estratégica.</div>
+            <div class="dato-source">Latam Business School / McKinsey / KPMG / Mercer, "Guía de Diseño Organizacional 2025"</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="razon reveal">
+      <div class="razon-num">04</div>
+      <div class="razon-content">
+        <div class="razon-title">El liderazgo transformacional ya demostró su impacto en contextos similares</div>
+        <div class="razon-body">Las transformaciones basadas en liderazgo transformacional, colaboración interárea y propósito organizacional tienen resultados documentados y medibles. No se trata de teoría: existen casos concretos en México y América Latina donde empresas con retos similares a los de Precise Choice — mercados estancados, cultura desalineada, liderazgo poco inspirador — lograron resultados sobresalientes en períodos de 12 a 24 meses.</div>
+        <div class="dato-box">
+          <div class="dato-icon">🏆</div>
+          <div>
+            <div class="dato-text">Una empresa retail mexicana con cultura organizacional desalineada adoptó un modelo de liderazgo transformacional centrado en valores compartidos y colaboración interárea. En 12 meses logró un aumento del 40% en satisfacción del cliente, un crecimiento del 35% en ventas y mayor retención del talento joven. Las organizaciones centradas en las personas tienen 1.4 veces más probabilidades de superar a sus competidores en rentabilidad.</div>
+            <div class="dato-source">We Are Drew, "Cómo el liderazgo transformacional impulsa resultados en 2025"</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="razon reveal">
+      <div class="razon-num">05</div>
+      <div class="razon-content">
+        <div class="razon-title">El costo de no transformarse es mayor que el costo de transformarse</div>
+        <div class="razon-body">La pregunta no es si Precise Choice puede permitirse invertir en esta transformación. La pregunta es si puede permitirse no hacerlo. Cada año sin institucionalizar el liderazgo es un año más de vulnerabilidad operativa. Cada año sin células ágiles es un año más de ciclos de decisión lentos. Cada año sin aliados D2C es un año más de datos del consumidor que va a la competencia. La transformación tiene un costo; la parálisis tiene un costo mayor y más silencioso.</div>
+        <div class="dato-box">
+          <div class="dato-icon">⚠️</div>
+          <div>
+            <div class="dato-text">Las empresas que reaccionan al cambio como respuesta a crisis son significativamente menos exitosas que las que buscan mejoras constantes de forma proactiva. Ser proactivos, flexibles y mantener una visión orientada al futuro no es solo importante: es esencial para prosperar en mercados tan dinámicos como el de tecnología de consumo en México.</div>
+            <div class="dato-source">Codurance, "Cómo impulsar cambios organizacionales de manera efectiva en 2025"</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PERSPECTIVAS DE EXPERTOS -->
+<section class="alt-section">
+  <div class="container">
+    <p class="section-label reveal">Perspectivas de expertos</p>
+    <h2 class="section-title reveal">Lo que dicen quienes han estudiado la transformación</h2>
+    <div class="expert-grid reveal">
+      <div class="expert-card">
+        <div class="expert-quote">"Las organizaciones que han invertido en rediseñar sus modelos operativos y en construir culturas adaptativas han logrado mayor resiliencia, productividad y retención de talento. El diseño organizacional en 2025 ya no es un lujo, es una necesidad estratégica."</div>
+        <div class="expert-name">McKinsey, KPMG y Mercer</div>
+        <div class="expert-role">Guía de Diseño y Desarrollo Organizacional 2025</div>
+      </div>
+      <div class="expert-card">
+        <div class="expert-quote">"Las estructuras diseñadas por habilidades, no solo por cargos, y la cultura organizacional ágil basada en equipos son las tendencias que distinguen a las organizaciones más competitivas. Simplicidad organizativa para reducir burocracia y costos."</div>
+        <div class="expert-name">Latam Business School</div>
+        <div class="expert-role">Tendencias de diseño organizacional 2025</div>
+      </div>
+      <div class="expert-card">
+        <div class="expert-quote">"El liderazgo transformacional se consolida como una de las estrategias más efectivas para impulsar el cambio organizacional, mejorar la competitividad y fortalecer la cultura interna. Este estilo pone el foco en la inspiración, el desarrollo del talento y la visión compartida."</div>
+        <div class="expert-name">We Are Drew</div>
+        <div class="expert-role">Liderazgo transformacional en América Latina, 2025</div>
+      </div>
+      <div class="expert-card">
+        <div class="expert-quote">"La capacidad de procesar datos en tiempo real está permitiendo a las empresas responder rápidamente a cambios en el mercado. Las empresas que adoptan el big data y los sistemas de inteligencia de mercado de manera efectiva cosechan beneficios tangibles y sostenibles."</div>
+        <div class="expert-name">Universidad ISEP</div>
+        <div class="expert-role">Big Data y toma de decisiones empresariales, 2025</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BENEFICIOS ESPERADOS -->
+<section>
+  <div class="container">
+    <p class="section-label reveal">Beneficios esperados</p>
+    <h2 class="section-title reveal">¿Qué gana Precise Choice con este ecosistema?</h2>
+    <p class="body-text reveal">La implementación del ecosistema MOE genera beneficios tangibles e intangibles en tres horizontes de tiempo: inmediato (0–6 meses), mediano plazo (6–18 meses) y largo plazo (18–36 meses).</p>
+    <div class="benefit-grid reveal">
+      <div class="benefit-cell">
+        <div class="benefit-icon">⚡</div>
+        <div class="benefit-title">Mayor velocidad de respuesta</div>
+        <div class="benefit-body">Las células con autonomía decisional reducen los ciclos de aprobación y permiten responder al mercado en días, no en semanas.</div>
+      </div>
+      <div class="benefit-cell">
+        <div class="benefit-icon">🎯</div>
+        <div class="benefit-title">Mejor experiencia del cliente</div>
+        <div class="benefit-body">La obsesión por el cliente como capacidad institucional se traduce en productos más relevantes, mejor soporte y mayor fidelización.</div>
+      </div>
+      <div class="benefit-cell">
+        <div class="benefit-icon">🌱</div>
+        <div class="benefit-title">Retención del talento clave</div>
+        <div class="benefit-body">Los mandos medios habilitados con autonomía y desarrollo profesional tienen mayores razones para crecer dentro de la organización.</div>
+      </div>
+      <div class="benefit-cell">
+        <div class="benefit-icon">🏗️</div>
+        <div class="benefit-title">Continuidad operativa</div>
+        <div class="benefit-body">Una organización con liderazgo institucional y procesos documentados puede operar con resiliencia independientemente de quién esté al frente.</div>
+      </div>
+      <div class="benefit-cell">
+        <div class="benefit-icon">💡</div>
+        <div class="benefit-title">Innovación sistematizada</div>
+        <div class="benefit-body">Las células de innovación con metodología ágil aceleran el tiempo de lanzamiento de nuevas líneas como IA, IoT y Gaming.</div>
+      </div>
+      <div class="benefit-cell">
+        <div class="benefit-icon">📈</div>
+        <div class="benefit-title">Crecimiento sostenible</div>
+        <div class="benefit-body">Un ecosistema orientado al mercado no solo crece — crece de manera sostenible porque tiene las capacidades para anticipar y adaptarse continuamente.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA FINAL -->
+<div class="cta-section reveal">
+  <h2 class="cta-title">Precise Choice tiene todo<br>para <em>reinventarse</em></h2>
+  <p class="cta-body">35 años de experiencia, un campus de clase mundial, tres marcas diferenciadas y — lo más importante — la voluntad de cambiar. El ecosistema MOE no es el punto de llegada: es el punto de partida de la siguiente era de Precise Choice.</p>
+  <a href="index.html" class="cta-link">Volver al inicio del ecosistema →</a>
+</div>
+
+<footer>
+  <div class="footer-brand"><svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:inline-block;vertical-align:middle;margin-right:8px">
+  <rect width="32" height="32" rx="6" fill="#1A6BE8"/>
+  <path d="M8 8h7c2.8 0 4.5 1.8 4.5 4.2 0 2.4-1.7 4.2-4.5 4.2H11v5.6H8V8zm3 2.4v3.6h3.8c1.2 0 1.9-.7 1.9-1.8 0-1.1-.7-1.8-1.9-1.8H11z" fill="white"/>
+  <path d="M20 8h3.5c3 0 5.5 2.4 5.5 6s-2.5 6-5.5 6H20V8zm3 2.4v7.2h.5c1.7 0 2.8-1.3 2.8-3.6s-1.1-3.6-2.8-3.6H23z" fill="rgba(255,255,255,0.7)"/>
+</svg><span style="font-family:var(--serif);font-size:15px;font-weight:600;color:var(--black)">Precise <span style="color:#1A6BE8">Choice</span></span> 2026</div>
+  <nav class="footer-nav">
+    <a href="07-propuestas.html">← Propuestas</a>
+    <a href="index.html">↑ Inicio</a>
+  </nav>
+</footer>
+<script>
+  const obs=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')}),{threshold:.06});
+  document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>

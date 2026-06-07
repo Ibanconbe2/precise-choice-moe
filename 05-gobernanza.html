@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta http-equiv="Content-Security-Policy" content="frame-ancestors *;">
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gobernanza — Precise Choice MOE</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root{--black:#0F0F0F;--white:#FAFAFA;--orange:#1A6BE8;--orange-light:#EBF1FD;--gray-100:#F5F5F5;--gray-200:#E8E8E8;--gray-400:#9E9E9E;--gray-600:#616161;--gray-800:#2E2E2E;--serif:'Playfair Display',Georgia,serif;--sans:'DM Sans',system-ui,sans-serif}
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:var(--sans);background:var(--white);color:var(--black);line-height:1.6;overflow-x:hidden}
+  nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(250,250,250,0.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--gray-200);padding:0 2rem;height:60px;display:flex;align-items:center;justify-content:space-between}
+  .nav-logo{font-family:var(--serif);font-size:15px;font-weight:600;color:var(--black);text-decoration:none}.nav-logo span{color:var(--orange)}
+  .nav-back{font-size:13px;color:var(--gray-600);text-decoration:none;display:flex;align-items:center;gap:6px;transition:color .2s}.nav-back:hover{color:var(--orange)}
+  .page-hero{padding:8rem 2rem 4rem;max-width:1100px;margin:0 auto}
+  .eyebrow{font-size:11px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--orange);margin-bottom:1rem;display:flex;align-items:center;gap:10px}.eyebrow::before{content:'';width:24px;height:1px;background:var(--orange)}
+  .page-title{font-family:var(--serif);font-size:clamp(2.5rem,6vw,5rem);font-weight:700;line-height:1.05;margin-bottom:1.5rem}.page-title em{font-style:italic;color:var(--orange)}
+  .page-intro{font-size:17px;font-weight:300;color:var(--gray-600);max-width:620px;line-height:1.8}
+  .num-badge{font-family:var(--serif);font-size:8rem;font-weight:700;color:var(--gray-200);line-height:1;float:right;margin-left:2rem;margin-top:-1rem}
+  section{padding:4rem 2rem}.container{max-width:1100px;margin:0 auto}
+  .section-label{font-size:11px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--orange);margin-bottom:.75rem}
+  .section-title{font-family:var(--serif);font-size:clamp(1.6rem,3vw,2.4rem);font-weight:600;color:var(--black);margin-bottom:1.25rem;line-height:1.2}
+  .body-text{font-size:15px;font-weight:300;color:var(--gray-600);line-height:1.8;margin-bottom:1.5rem}
+  .alt-section{background:var(--gray-100)}.dark-section{background:var(--black);color:var(--white)}
+  .dark-section .section-title{color:var(--white)}.dark-section .body-text{color:rgba(255,255,255,.6)}
+  .mec-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem;margin-top:1.5rem}
+  .mec-card{padding:1.5rem 1.75rem;border:1px solid var(--gray-200)}
+  .mec-title{font-size:14px;font-weight:500;color:var(--black);margin-bottom:.4rem}
+  .mec-body{font-size:13px;color:var(--gray-600);line-height:1.65;margin-bottom:.75rem}
+  .mec-status{display:inline-block;font-size:11px;font-weight:500;padding:3px 10px}
+  .s-ok{background:#EAF3DE;color:#27500A}.s-warn{background:#E8F0FD;color:#0C3A7A}.s-crit{background:#FAECE7;color:#712B13}
+  .mec-focus{border:2px solid var(--orange);background:var(--orange-light)}
+  .phase-timeline{display:flex;flex-direction:column;gap:0;margin-top:1.5rem}
+  .phase{display:grid;grid-template-columns:160px 1fr;gap:2rem;padding:2rem 0;border-top:1px solid rgba(255,255,255,.1)}
+  .phase:first-child{border-top:none}
+  .phase-meta{}
+  .phase-num{font-family:var(--serif);font-size:2.5rem;font-weight:700;color:rgba(255,255,255,.15);line-height:1;margin-bottom:.3rem}
+  .phase-timing{font-size:11px;font-weight:500;color:var(--orange);letter-spacing:.06em;text-transform:uppercase}
+  .phase-name{font-family:var(--serif);font-size:1rem;font-weight:600;color:var(--white);margin-top:.3rem}
+  .phase-content{}
+  .phase-title-main{font-size:15px;font-weight:500;color:var(--white);margin-bottom:.5rem}
+  .phase-body{font-size:13px;color:rgba(255,255,255,.55);line-height:1.75}
+  .phase-insight{font-size:12px;font-style:italic;color:var(--orange);margin-top:.6rem;padding-top:.6rem;border-top:1px solid rgba(255,255,255,.08)}
+  .rhythm-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:1rem;margin-top:1.5rem}
+  .rhythm-card{padding:1.5rem;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1)}
+  .rhythm-freq{font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:.08em;color:var(--orange);margin-bottom:.4rem}
+  .rhythm-body{font-size:13px;color:rgba(255,255,255,.55);line-height:1.65}
+  .reveal{opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .6s ease}.reveal.visible{opacity:1;transform:none}
+  footer{background:var(--white);border-top:1px solid var(--gray-200);padding:1.5rem 2rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem}
+  .footer-brand{font-family:var(--serif);font-size:14px;font-weight:600}.footer-brand span{color:var(--orange)}
+  .footer-nav{display:flex;gap:1.5rem}.footer-nav a{font-size:12px;color:var(--gray-400);text-decoration:none;transition:color .2s}.footer-nav a:hover{color:var(--orange)}
+  @media(max-width:640px){.phase{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<nav>
+  <a href="index.html" class="nav-logo"><svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:inline-block;vertical-align:middle;margin-right:8px">
+  <rect width="32" height="32" rx="6" fill="#1A6BE8"/>
+  <path d="M8 8h7c2.8 0 4.5 1.8 4.5 4.2 0 2.4-1.7 4.2-4.5 4.2H11v5.6H8V8zm3 2.4v3.6h3.8c1.2 0 1.9-.7 1.9-1.8 0-1.1-.7-1.8-1.9-1.8H11z" fill="white"/>
+  <path d="M20 8h3.5c3 0 5.5 2.4 5.5 6s-2.5 6-5.5 6H20V8zm3 2.4v7.2h.5c1.7 0 2.8-1.3 2.8-3.6s-1.1-3.6-2.8-3.6H23z" fill="rgba(255,255,255,0.7)"/>
+</svg><span style="font-family:var(--serif);font-size:15px;font-weight:600;color:var(--black)">Precise <span style="color:#1A6BE8">Choice</span></span></a>
+  <a href="index.html" class="nav-back">← Volver al inicio</a>
+</nav>
+<div class="page-hero">
+  <span class="num-badge">05</span>
+  <p class="eyebrow">Elemento MOE · 05</p>
+  <h1 class="page-title">La <em>Gobernanza</em><br>del Cambio</h1>
+  <p class="page-intro">Los 6 mecanismos de gobernanza evaluados y el modelo dinámico de transformación organizacional en 5 fases, adaptado a las necesidades específicas de Precise Choice.</p>
+</div>
+
+<section class="alt-section">
+  <div class="container">
+    <p class="section-label reveal">Los 6 mecanismos</p>
+    <h2 class="section-title reveal">Estado actual de la gobernanza</h2>
+    <p class="body-text reveal">El MOE evalúa seis mecanismos de gobernanza que favorecen la orientación al mercado. Los tres resaltados en naranja son los prioritarios para el modelo de transformación de Precise Choice.</p>
+    <div class="mec-grid reveal">
+      <div class="mec-card mec-focus">
+        <div class="mec-title">Cultura orientada al mercado</div>
+        <div class="mec-body">Valores y comportamientos que priorizan al cliente y la adaptación continua. Existe en Precise Choice, pero no está institucionalizada en todos los niveles.</div>
+        <span class="mec-status s-warn">Parcialmente instalada — PRIORITARIO</span>
+      </div>
+      <div class="mec-card mec-focus">
+        <div class="mec-title">Estructura y diseño organizacional</div>
+        <div class="mec-body">Morfología que facilita la agilidad y la colaboración entre células. La transición de departamentos a células es el cambio estructural más urgente.</div>
+        <span class="mec-status s-warn">En transición — PRIORITARIO</span>
+      </div>
+      <div class="mec-card mec-focus">
+        <div class="mec-title">Liderazgo transformacional</div>
+        <div class="mec-body">Líderes que impulsan el cambio y modelan los comportamientos deseados. La brecha en la Dirección General (2.52/5) hace de este el mecanismo más urgente.</div>
+        <span class="mec-status s-crit">Área crítica — PRIORITARIO</span>
+      </div>
+      <div class="mec-card">
+        <div class="mec-title">Sistemas de medición y control</div>
+        <div class="mec-body">OKRs, indicadores y tableros que alinean el desempeño con los objetivos estratégicos. Ausentes o inconsistentes en la mayoría de las áreas.</div>
+        <span class="mec-status s-crit">Débil / ausente</span>
+      </div>
+      <div class="mec-card">
+        <div class="mec-title">Gestión del talento y capacidades</div>
+        <div class="mec-body">Procesos de desarrollo orientados a construir las capacidades que el ecosistema necesita. Actualmente informal y reactivo.</div>
+        <span class="mec-status s-warn">Informal</span>
+      </div>
+      <div class="mec-card">
+        <div class="mec-title">Procesos y sistemas de información</div>
+        <div class="mec-body">Flujos de trabajo y datos que conectan las células con el mercado. El equipo de Transformación Estratégica trabaja en esto activamente.</div>
+        <span class="mec-status s-warn">En desarrollo</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="dark-section">
+  <div class="container">
+    <p class="section-label reveal" style="color:var(--orange)">Modelo dinámico</p>
+    <h2 class="section-title reveal">5 fases de transformación</h2>
+    <p class="body-text reveal">Basado en el modelo de Kotter de 8 pasos, integrado con principios ágiles y adaptado a Precise Choice. Los tres mecanismos prioritarios se transforman en paralelo, no en secuencia, y se retroalimentan mutuamente en cada fase.</p>
+    <div class="phase-timeline reveal">
+      <div class="phase">
+        <div class="phase-meta">
+          <div class="phase-num">0</div>
+          <div class="phase-timing">Meses 1–2</div>
+          <div class="phase-name">Urgencia</div>
+        </div>
+        <div class="phase-content">
+          <div class="phase-title-main">Urgencia y diagnóstico compartido</div>
+          <div class="phase-body">La Dirección General comunica por qué el cambio es urgente e inevitable. Se comparte el diagnóstico MOE con todos los niveles. Se forma la "coalición guía": 6–8 líderes clave de distintas áreas que liderarán la transformación desde adentro.</div>
+          <div class="phase-insight">Lo que sucede: la organización pasa de "siempre lo hemos hecho así" a "entendemos por qué debemos cambiar". La urgencia no se impone — se construye colectivamente.</div>
+        </div>
+      </div>
+      <div class="phase">
+        <div class="phase-meta">
+          <div class="phase-num">1</div>
+          <div class="phase-timing">Meses 2–8</div>
+          <div class="phase-name">Cultura</div>
+        </div>
+        <div class="phase-content">
+          <div class="phase-title-main">Anclar la cultura — gobernanza cultural</div>
+          <div class="phase-body">Se definen y comunican los comportamientos culturales no negociables del nuevo ecosistema: obsesión por el cliente, velocidad de decisión, colaboración entre células y aprendizaje continuo. Se diseñan rituales culturales nuevos. Los líderes modelan los comportamientos antes de pedirlos.</div>
+          <div class="phase-insight">Lo que sucede: la cultura deja de ser "lo que decimos que somos" y se convierte en "lo que hacemos todos los días". El ADN fundacional se preserva, pero se amplía con nuevos comportamientos orientados al mercado.</div>
+        </div>
+      </div>
+      <div class="phase">
+        <div class="phase-meta">
+          <div class="phase-num">2</div>
+          <div class="phase-timing">Meses 4–14</div>
+          <div class="phase-name">Estructura</div>
+        </div>
+        <div class="phase-content">
+          <div class="phase-title-main">Rediseñar la estructura — gobernanza morfológica</div>
+          <div class="phase-body">Se activan las primeras células piloto (Innovación de Producto + Experiencia de Canal). Se define la matriz RAPID de autoridad decisional. La plataforma migra de "área de control" a "área de servicio". Se instalan OKRs por célula visibles en tableros compartidos.</div>
+          <div class="phase-insight">Lo que sucede: la organización experimenta por primera vez lo que se siente tomar decisiones rápidas con autonomía. Los mandos medios descubren que tienen más capacidad de impacto cuando no tienen que escalar todo.</div>
+        </div>
+      </div>
+      <div class="phase">
+        <div class="phase-meta">
+          <div class="phase-num">3</div>
+          <div class="phase-timing">Meses 6–24</div>
+          <div class="phase-name">Liderazgo</div>
+        </div>
+        <div class="phase-content">
+          <div class="phase-title-main">Fortalecer el liderazgo — gobernanza de personas</div>
+          <div class="phase-body">Se lanza el programa formal de habilitación de mandos medios como líderes de célula. Se implementa la marca de liderazgo compartida con competencias visibles en toda la organización. Se activan programas de mentoría inversa (senior-junior). La sucesión institucional avanza.</div>
+          <div class="phase-insight">Lo que sucede: la empresa comienza a funcionar más fluidamente sin depender de una o dos personas. Los líderes de célula ganan confianza, los equipos ganan autonomía y la Dirección puede dedicar más tiempo a la visión.</div>
+        </div>
+      </div>
+      <div class="phase">
+        <div class="phase-meta">
+          <div class="phase-num">4</div>
+          <div class="phase-timing">Meses 18–36+</div>
+          <div class="phase-name">Consolidación</div>
+        </div>
+        <div class="phase-content">
+          <div class="phase-title-main">Institucionalizar y escalar — el ecosistema en marcha</div>
+          <div class="phase-body">Los tres mecanismos transformados (cultura, estructura, liderazgo) se consolidan y generan efecto multiplicador sobre los otros tres. Las victorias tempranas de las células piloto se documentan y escalan. Precise Choice opera como un ecosistema orientado al mercado donde la agilidad y la innovación son parte del ADN institucional.</div>
+          <div class="phase-insight">Lo que sucede: la organización ya no depende de quién esté al frente. El cambio es el nuevo estatus quo.</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top:3rem;padding-top:2rem;border-top:1px solid rgba(255,255,255,.1)">
+      <p class="section-label" style="color:var(--orange)">Ritmo de gobernanza</p>
+      <h3 style="font-family:var(--serif);font-size:1.4rem;color:var(--white);margin-bottom:.75rem">Ciclos de revisión y aprendizaje</h3>
+      <div class="rhythm-grid">
+        <div class="rhythm-card"><div class="rhythm-freq">Semanal</div><div class="rhythm-body">Stand-up de células (15 min). ¿Qué avanzamos? ¿Qué nos bloquea? ¿Qué aprendimos?</div></div>
+        <div class="rhythm-card"><div class="rhythm-freq">Mensual</div><div class="rhythm-body">Revisión de OKRs por célula. Tablero de gobernanza visible para toda la organización. Reconocimiento de aprendizajes.</div></div>
+        <div class="rhythm-card"><div class="rhythm-freq">Trimestral</div><div class="rhythm-body">Evaluación de los 6 mecanismos. Ajuste de la hoja de ruta. Decisión de escalar o pivotar células.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-brand"><svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:inline-block;vertical-align:middle;margin-right:8px">
+  <rect width="32" height="32" rx="6" fill="#1A6BE8"/>
+  <path d="M8 8h7c2.8 0 4.5 1.8 4.5 4.2 0 2.4-1.7 4.2-4.5 4.2H11v5.6H8V8zm3 2.4v3.6h3.8c1.2 0 1.9-.7 1.9-1.8 0-1.1-.7-1.8-1.9-1.8H11z" fill="white"/>
+  <path d="M20 8h3.5c3 0 5.5 2.4 5.5 6s-2.5 6-5.5 6H20V8zm3 2.4v7.2h.5c1.7 0 2.8-1.3 2.8-3.6s-1.1-3.6-2.8-3.6H23z" fill="rgba(255,255,255,0.7)"/>
+</svg><span style="font-family:var(--serif);font-size:15px;font-weight:600;color:var(--black)">Precise <span style="color:#1A6BE8">Choice</span></span> 2026</div>
+  <nav class="footer-nav">
+    <a href="04-morfologia.html">← Morfología</a>
+    <a href="06-liderazgo.html">Siguiente: Liderazgo →</a>
+  </nav>
+</footer>
+<script>
+  const obs=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')}),{threshold:.06});
+  document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>
