@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta http-equiv="Content-Security-Policy" content="frame-ancestors *;">
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Propuestas de Transformación — Precise Choice MOE</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root{--black:#0F0F0F;--white:#FAFAFA;--orange:#1A6BE8;--orange-light:#EBF1FD;--gray-100:#F5F5F5;--gray-200:#E8E8E8;--gray-400:#9E9E9E;--gray-600:#616161;--gray-800:#2E2E2E;--serif:'Playfair Display',Georgia,serif;--sans:'DM Sans',system-ui,sans-serif}
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:var(--sans);background:var(--white);color:var(--black);line-height:1.6;overflow-x:hidden}
+  nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(250,250,250,0.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--gray-200);padding:0 2rem;height:60px;display:flex;align-items:center;justify-content:space-between}
+  .nav-logo{font-family:var(--serif);font-size:15px;font-weight:600;color:var(--black);text-decoration:none}.nav-logo span{color:var(--orange)}
+  .nav-back{font-size:13px;color:var(--gray-600);text-decoration:none;display:flex;align-items:center;gap:6px;transition:color .2s}.nav-back:hover{color:var(--orange)}
+  .page-hero{padding:8rem 2rem 5rem;max-width:1100px;margin:0 auto;position:relative}
+  .eyebrow{font-size:11px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--orange);margin-bottom:1rem;display:flex;align-items:center;gap:10px}.eyebrow::before{content:'';width:24px;height:1px;background:var(--orange)}
+  .page-title{font-family:var(--serif);font-size:clamp(2.5rem,6vw,5rem);font-weight:700;line-height:1.05;margin-bottom:1.5rem}.page-title em{font-style:italic;color:var(--orange)}
+  .page-intro{font-size:17px;font-weight:300;color:var(--gray-600);max-width:640px;line-height:1.8}
+  .num-badge{font-family:var(--serif);font-size:8rem;font-weight:700;color:var(--gray-200);line-height:1;float:right;margin-left:2rem;margin-top:-1rem}
+  section{padding:4.5rem 2rem}.container{max-width:1100px;margin:0 auto}
+  .section-label{font-size:11px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--orange);margin-bottom:.75rem}
+  .section-title{font-family:var(--serif);font-size:clamp(1.6rem,3vw,2.4rem);font-weight:600;color:var(--black);margin-bottom:1.25rem;line-height:1.2}
+  .body-text{font-size:15px;font-weight:300;color:var(--gray-600);line-height:1.8;margin-bottom:1.5rem}
+  .alt-section{background:var(--gray-100)}.dark-section{background:var(--black);color:var(--white)}
+  .dark-section .section-title{color:var(--white)}.dark-section .body-text{color:rgba(255,255,255,.6)}
+
+  /* PROPUESTA CULTURAL */
+  .cultural-hero{background:var(--black);color:var(--white);padding:4rem 2rem}
+  .cultural-hero .container{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start}
+  .cultural-hero .section-title{color:var(--white);font-size:clamp(2rem,4vw,3rem)}
+  .cultural-hero .body-text{color:rgba(255,255,255,.6)}
+  .culture-pillars{display:flex;flex-direction:column;gap:1rem;margin-top:1.5rem}
+  .culture-pillar{border:1px solid rgba(255,255,255,.12);padding:1.25rem 1.5rem}
+  .culture-pillar-title{font-size:13px;font-weight:500;color:var(--orange);margin-bottom:.4rem}
+  .culture-pillar-body{font-size:13px;color:rgba(255,255,255,.55);line-height:1.65}
+  .behaviors-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:.75rem;margin-top:1.5rem}
+  .behavior-card{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);padding:1.25rem}
+  .behavior-icon{font-size:1.5rem;margin-bottom:.5rem}
+  .behavior-title{font-size:13px;font-weight:500;color:var(--white);margin-bottom:.3rem}
+  .behavior-body{font-size:12px;color:rgba(255,255,255,.5);line-height:1.6}
+
+  /* LÍNEAS DE LIDERAZGO */
+  .linea-hero{padding:1rem 0 .5rem;border-bottom:2px solid var(--orange);margin-bottom:2rem;display:flex;align-items:center;gap:1.25rem}
+  .linea-num-big{font-family:var(--serif);font-size:4rem;font-weight:700;color:var(--orange);line-height:1}
+  .linea-meta{}
+  .linea-tag{font-size:11px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--orange);margin-bottom:.3rem}
+  .linea-title-main{font-family:var(--serif);font-size:1.6rem;font-weight:700;color:var(--black);line-height:1.15}
+  .linea-sub-text{font-size:13px;color:var(--gray-600);margin-top:.3rem}
+  .linea-block{padding:3rem 0;border-bottom:1px solid var(--gray-200)}
+  .linea-block:last-child{border-bottom:none}
+  .why-box{background:var(--orange-light);border-left:3px solid var(--orange);padding:1.25rem 1.5rem;margin-bottom:2rem}
+  .why-label{font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:.08em;color:var(--orange);margin-bottom:.4rem}
+  .why-text{font-size:13px;color:var(--gray-800);line-height:1.7}
+  .modules-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;margin:1.5rem 0}
+  .module-card{border:1px solid var(--gray-200);padding:1.5rem}
+  .module-num{font-family:var(--serif);font-size:1.8rem;font-weight:700;color:var(--gray-200);margin-bottom:.4rem;line-height:1}
+  .module-title{font-size:13px;font-weight:500;color:var(--black);margin-bottom:.4rem}
+  .module-body{font-size:12px;color:var(--gray-600);line-height:1.6}
+  .module-tag{display:inline-block;font-size:11px;padding:2px 8px;background:var(--gray-100);color:var(--gray-800);margin-top:.5rem}
+  .impact-strip{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:1px;background:var(--gray-200);border:1px solid var(--gray-200);margin-top:1.5rem}
+  .impact-cell{background:var(--white);padding:1.25rem;text-align:center}
+  .impact-num{font-family:var(--serif);font-size:2rem;font-weight:700;color:var(--orange);line-height:1;margin-bottom:.2rem}
+  .impact-label{font-size:11px;color:var(--gray-600);line-height:1.4}
+  .timeline-row{display:flex;gap:0;margin-top:1.5rem;overflow-x:auto}
+  .timeline-step{flex:1;min-width:120px;padding:1rem;border-left:1px solid var(--gray-200)}
+  .timeline-step:first-child{border-left:none}
+  .t-month{font-size:11px;font-weight:500;color:var(--orange);text-transform:uppercase;letter-spacing:.06em;margin-bottom:.3rem}
+  .t-title{font-size:12px;font-weight:500;color:var(--black);margin-bottom:.3rem}
+  .t-body{font-size:11px;color:var(--gray-600);line-height:1.5}
+
+  .reveal{opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .6s ease}.reveal.visible{opacity:1;transform:none}
+  footer{background:var(--white);border-top:1px solid var(--gray-200);padding:1.5rem 2rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem}
+  .footer-brand{font-family:var(--serif);font-size:14px;font-weight:600}.footer-brand span{color:var(--orange)}
+  .footer-nav{display:flex;gap:1.5rem}.footer-nav a{font-size:12px;color:var(--gray-400);text-decoration:none;transition:color .2s}.footer-nav a:hover{color:var(--orange)}
+  @media(max-width:768px){.cultural-hero .container{grid-template-columns:1fr;gap:2rem}}
+</style>
+</head>
+<body>
+<nav>
+  <a href="index.html" class="nav-logo"><svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:inline-block;vertical-align:middle;margin-right:8px">
+  <rect width="32" height="32" rx="6" fill="#1A6BE8"/>
+  <path d="M8 8h7c2.8 0 4.5 1.8 4.5 4.2 0 2.4-1.7 4.2-4.5 4.2H11v5.6H8V8zm3 2.4v3.6h3.8c1.2 0 1.9-.7 1.9-1.8 0-1.1-.7-1.8-1.9-1.8H11z" fill="white"/>
+  <path d="M20 8h3.5c3 0 5.5 2.4 5.5 6s-2.5 6-5.5 6H20V8zm3 2.4v7.2h.5c1.7 0 2.8-1.3 2.8-3.6s-1.1-3.6-2.8-3.6H23z" fill="rgba(255,255,255,0.7)"/>
+</svg><span style="font-family:var(--serif);font-size:15px;font-weight:600;color:var(--black)">Precise <span style="color:#1A6BE8">Choice</span></span></a>
+  <a href="index.html" class="nav-back">← Volver al inicio</a>
+</nav>
+
+<!-- HERO -->
+<div class="page-hero">
+  <span class="num-badge">PT</span>
+  <p class="eyebrow">Propuestas de transformación</p>
+  <h1 class="page-title">Cambio <em>cultural</em><br>y liderazgo</h1>
+  <p class="page-intro">Tres propuestas concretas y accionables para transformar Precise Choice: una propuesta de cambio cultural y dos líneas de acción para el desarrollo de habilidades de liderazgo, basadas en los hallazgos del diagnóstico MOE y la encuesta de liderazgo.</p>
+</div>
+
+<!-- PROPUESTA CULTURAL -->
+<div class="cultural-hero">
+  <div class="container">
+    <div class="reveal">
+      <p class="section-label" style="color:var(--orange)">Propuesta 01 · Cultura</p>
+      <h2 class="section-title" style="color:var(--white)">Propuesta de<br>cambio cultural</h2>
+      <p class="body-text" style="color:rgba(255,255,255,.6)">La cultura es el mecanismo de gobernanza más poderoso — y el más difícil de transformar. Esta propuesta define los cinco comportamientos culturales no negociables que Precise Choice debe instalar en todos sus niveles para operar como un ecosistema orientado al mercado.</p>
+      <p class="body-text" style="color:rgba(255,255,255,.6)">La clave es preservar el ADN fundacional de la marca — cercanía con el cliente, calidad, ética — y ampliar ese núcleo con nuevos comportamientos que la siguiente etapa demanda. No se destruye la cultura existente: se evoluciona.</p>
+      <div class="culture-pillars">
+        <div class="culture-pillar">
+          <div class="culture-pillar-title">De la centralización → a la confianza institucional</div>
+          <div class="culture-pillar-body">Las decisiones se toman en el nivel donde existe el conocimiento necesario para tomarlas bien. Los líderes de célula tienen autoridad real dentro de su ámbito. La Dirección General establece el rumbo, no el detalle operativo.</div>
+        </div>
+        <div class="culture-pillar">
+          <div class="culture-pillar-title">De los silos → a la corresponsabilidad entre áreas</div>
+          <div class="culture-pillar-body">Cada área entiende cómo sus decisiones impactan al resto de la operación y al cliente final. El éxito se mide en resultados compartidos, no en métricas departamentales que optimizan la parte a costa del todo.</div>
+        </div>
+        <div class="culture-pillar">
+          <div class="culture-pillar-title">Del conocimiento individual → al aprendizaje colectivo</div>
+          <div class="culture-pillar-body">Los procesos, decisiones y aprendizajes se documentan y comparten. El conocimiento institucional vive en sistemas, no en personas. El error se convierte en insumo de mejora, no en motivo de sanción.</div>
+        </div>
+      </div>
+    </div>
+    <div class="reveal">
+      <p style="font-size:12px;font-weight:500;text-transform:uppercase;letter-spacing:.08em;color:rgba(255,255,255,.4);margin-bottom:1rem">Los 5 comportamientos culturales no negociables</p>
+      <div class="behaviors-grid">
+        <div class="behavior-card">
+          <div class="behavior-icon">🎯</div>
+          <div class="behavior-title">Obsesión por el cliente</div>
+          <div class="behavior-body">Toda decisión — de producto, de proceso, de área — se evalúa en función de su impacto en el cliente final. Su voz está presente en todas las conversaciones estratégicas.</div>
+        </div>
+        <div class="behavior-card">
+          <div class="behavior-icon">⚡</div>
+          <div class="behavior-title">Velocidad de decisión</div>
+          <div class="behavior-body">Las decisiones se toman con la mejor información disponible hoy, no con información perfecta que llegará mañana. La parálisis por análisis es el enemigo de la agilidad.</div>
+        </div>
+        <div class="behavior-card">
+          <div class="behavior-icon">🤝</div>
+          <div class="behavior-title">Colaboración real entre células</div>
+          <div class="behavior-body">Las células comparten información, recursos y aprendizajes de manera proactiva. La competencia interna se sustituye por la colaboración orientada a resultados de mercado.</div>
+        </div>
+        <div class="behavior-card">
+          <div class="behavior-icon">🔍</div>
+          <div class="behavior-title">Curiosidad y aprendizaje continuo</div>
+          <div class="behavior-body">Los líderes y equipos cuestionan rutinas con regularidad, experimentan con nuevas formas de trabajo y aprenden de los errores sin estigmatizarlos.</div>
+        </div>
+        <div class="behavior-card">
+          <div class="behavior-icon">🏆</div>
+          <div class="behavior-title">Reconocimiento y celebración</div>
+          <div class="behavior-body">El buen desempeño se reconoce de forma pública, personalizada y oportuna. Celebrar los logros — pequeños y grandes — es parte de la cultura, no una excepción.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CÓMO SE INSTALA LA CULTURA -->
+<section class="alt-section">
+  <div class="container">
+    <p class="section-label reveal">Mecanismos de instalación cultural</p>
+    <h2 class="section-title reveal">¿Cómo se construye en la práctica?</h2>
+    <p class="body-text reveal">La cultura no se declara en un cartel: se construye con rituales concretos y consistentes que los líderes modelan antes de pedirlos a sus equipos.</p>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem" class="reveal">
+      <div style="border:1px solid var(--gray-200);padding:1.5rem">
+        <div style="font-size:11px;font-weight:500;color:var(--orange);text-transform:uppercase;letter-spacing:.08em;margin-bottom:.5rem">Ritual semanal</div>
+        <div style="font-size:14px;font-weight:500;color:var(--black);margin-bottom:.4rem">Stand-up de célula</div>
+        <div style="font-size:13px;color:var(--gray-600);line-height:1.65">15 minutos. ¿Qué avanzamos? ¿Qué nos bloquea? ¿Qué aprendimos? Fomenta la transparencia y reduce la dependencia de validaciones hacia arriba.</div>
+      </div>
+      <div style="border:1px solid var(--gray-200);padding:1.5rem">
+        <div style="font-size:11px;font-weight:500;color:var(--orange);text-transform:uppercase;letter-spacing:.08em;margin-bottom:.5rem">Ritual mensual</div>
+        <div style="font-size:14px;font-weight:500;color:var(--black);margin-bottom:.4rem">Show & Tell de aprendizajes</div>
+        <div style="font-size:13px;color:var(--gray-600);line-height:1.65">Cada célula presenta un experimento, una mejora o un aprendizaje. Se celebran los intentos valiosos aunque no hayan resultado. Construye cultura de innovación sin riesgo de estigma.</div>
+      </div>
+      <div style="border:1px solid var(--gray-200);padding:1.5rem">
+        <div style="font-size:11px;font-weight:500;color:var(--orange);text-transform:uppercase;letter-spacing:.08em;margin-bottom:.5rem">Ritual mensual</div>
+        <div style="font-size:14px;font-weight:500;color:var(--black);margin-bottom:.4rem">Reconocimiento institucional</div>
+        <div style="font-size:13px;color:var(--gray-600);line-height:1.65">Reconocimiento público, nominado por pares, de comportamientos que encarnan los valores culturales. No solo resultados: también actitudes y colaboración.</div>
+      </div>
+      <div style="border:1px solid var(--gray-200);padding:1.5rem">
+        <div style="font-size:11px;font-weight:500;color:var(--orange);text-transform:uppercase;letter-spacing:.08em;margin-bottom:.5rem">Ritual trimestral</div>
+        <div style="font-size:14px;font-weight:500;color:var(--black);margin-bottom:.4rem">Pulso cultural</div>
+        <div style="font-size:13px;color:var(--gray-600);line-height:1.65">Encuesta breve de 10 preguntas que mide si los comportamientos culturales se están viviendo en el día a día. Los resultados se comparten con toda la organización.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LÍNEAS DE LIDERAZGO -->
+<section>
+  <div class="container">
+    <p class="section-label reveal">Propuestas 02 y 03 · Liderazgo</p>
+    <h2 class="section-title reveal">Dos líneas de acción<br>para el desarrollo de liderazgo</h2>
+    <p class="body-text reveal">Las dos líneas de acción propuestas se sustentan en los resultados de la encuesta aplicada a 53 colaboradores de Precise Choice. Atienden las dos brechas más urgentes: las dimensiones con menor calificación (reconocimiento 3.52/5 y visión inspiradora 3.55/5) y la brecha crítica de la Dirección General (2.52/5).</p>
+
+    <!-- LÍNEA 1 -->
+    <div class="linea-block reveal">
+      <div class="linea-hero">
+        <div class="linea-num-big">L1</div>
+        <div class="linea-meta">
+          <div class="linea-tag">Línea de acción 01</div>
+          <div class="linea-title-main">Programa de Liderazgo Inspirador:<br>Visión, Voz y Propósito</div>
+          <div class="linea-sub-text">Dimensiones objetivo: Visión inspiradora (3.55) · Reconocimiento (3.52) · Pensamiento innovador (3.57)</div>
+        </div>
+      </div>
+
+      <div class="why-box">
+        <div class="why-label">¿Por qué esta línea?</div>
+        <div class="why-text">Los datos son claros: los colaboradores de Precise Choice no perciben que sus líderes les comuniquen con claridad y emoción hacia dónde va la empresa, ni que celebren su buen desempeño de manera consistente. En una transformación organizacional, la visión que no se comunica con narrativa y emoción no moviliza a nadie. Y el reconocimiento que no llega a tiempo no cumple su función motivadora. Esta línea construye las dos capacidades que hoy más hacen falta en los líderes de Precise Choice.</div>
+      </div>
+
+      <p style="font-size:14px;font-weight:500;color:var(--black);margin-bottom:1rem">Estructura del programa · Duración: 8 meses</p>
+      <div class="modules-grid">
+        <div class="module-card">
+          <div class="module-num">M1</div>
+          <div class="module-title">Narrativa estratégica personal</div>
+          <div class="module-body">Cada líder construye su propio relato de la visión de la empresa: auténtico, concreto y movilizador para su equipo. Aprende a conectar el "qué hacemos" con el "por qué importa" a nivel personal.</div>
+          <span class="module-tag">Meses 1–2 · Taller presencial</span>
+        </div>
+        <div class="module-card">
+          <div class="module-num">M2</div>
+          <div class="module-title">El arte del reconocimiento efectivo</div>
+          <div class="module-body">Los líderes aprenden el protocolo de reconocimiento PC: público, personalizado, oportuno y vinculado a comportamientos culturales. Incluye práctica con feedback real de sus equipos.</div>
+          <span class="module-tag">Meses 2–4 · Taller + práctica</span>
+        </div>
+        <div class="module-card">
+          <div class="module-num">M3</div>
+          <div class="module-title">Liderazgo del pensamiento innovador</div>
+          <div class="module-body">Los líderes aprenden a facilitar el pensamiento divergente en sus equipos: cómo hacer preguntas que abren posibilidades, cómo recibir ideas sin bloquearlas y cómo crear espacios seguros para la experimentación.</div>
+          <span class="module-tag">Meses 4–6 · Laboratorio de innovación</span>
+        </div>
+        <div class="module-card">
+          <div class="module-num">M4</div>
+          <div class="module-title">Benchmark con Marketing: aprender del mejor</div>
+          <div class="module-body">La Dirección de Marketing (4.66/5) comparte sus prácticas de liderazgo con otras áreas. El modelo que funciona ya existe dentro de la empresa — hay que hacerlo visible y replicable en toda la organización.</div>
+          <span class="module-tag">Meses 6–8 · Comunidad de práctica</span>
+        </div>
+      </div>
+
+      <div class="impact-strip">
+        <div class="impact-cell">
+          <div class="impact-num">+1.5</div>
+          <div class="impact-label">Puntos esperados de mejora en dimensión reconocimiento</div>
+        </div>
+        <div class="impact-cell">
+          <div class="impact-num">8</div>
+          <div class="impact-label">Meses de duración del programa completo</div>
+        </div>
+        <div class="impact-cell">
+          <div class="impact-num">100%</div>
+          <div class="impact-label">Líderes de todos los niveles participan</div>
+        </div>
+        <div class="impact-cell">
+          <div class="impact-num">4</div>
+          <div class="impact-label">Módulos con práctica real en el trabajo</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- LÍNEA 2 -->
+    <div class="linea-block reveal">
+      <div class="linea-hero">
+        <div class="linea-num-big">L2</div>
+        <div class="linea-meta">
+          <div class="linea-tag">Línea de acción 02</div>
+          <div class="linea-title-main">Programa de Liderazgo Institucional:<br>Autonomía, Decisión y Marca Compartida</div>
+          <div class="linea-sub-text">Dimensiones objetivo: Brecha Dirección General (2.52/5) · Autonomía decisional · Sucesión institucional</div>
+        </div>
+      </div>
+
+      <div class="why-box">
+        <div class="why-label">¿Por qué esta línea?</div>
+        <div class="why-text">El hallazgo más revelador de la encuesta es que los 8 colaboradores más cercanos a la Dirección General califican el liderazgo con el promedio más bajo de toda la organización (2.52/5). Esto confirma lo que la propia empresa reconoció: el modelo de liderazgo actual es personalista y centralizado. Para que Precise Choice funcione como un ecosistema ágil, el liderazgo debe convertirse en una capacidad institucional — un conjunto de competencias, comportamientos y estándares que cualquier líder puede encarnar, independientemente de quién esté al frente.</div>
+      </div>
+
+      <p style="font-size:14px;font-weight:500;color:var(--black);margin-bottom:1rem">Estructura del programa · Duración: 12 meses</p>
+      <div class="modules-grid">
+        <div class="module-card">
+          <div class="module-num">M1</div>
+          <div class="module-title">La marca de liderazgo Precise Choice</div>
+          <div class="module-body">Co-creación con directores y mandos medios de las 5 competencias del líder PC: orientación al cliente, decisión ágil, desarrollo de talento, comunicación inspiradora e integridad. Cada competencia tiene comportamientos observables y medibles.</div>
+          <span class="module-tag">Meses 1–3 · Co-diseño participativo</span>
+        </div>
+        <div class="module-card">
+          <div class="module-num">M2</div>
+          <div class="module-title">Habilitación de líderes de célula</div>
+          <div class="module-body">Formación modular para mandos medios que liderarán las células: toma de decisiones con autonomía, gestión de conversaciones difíciles, OKRs, coaching de equipos y cómo dar retroalimentación que desarrolla, no solo evalúa.</div>
+          <span class="module-tag">Meses 3–9 · Formación modular mixta</span>
+        </div>
+        <div class="module-card">
+          <div class="module-num">M3</div>
+          <div class="module-title">Coaching ejecutivo para la Dirección General</div>
+          <div class="module-body">Proceso de acompañamiento individual de 6 meses para el equipo de dirección, enfocado en tres competencias: delegación real, comunicación de visión con narrativa y construcción de sistemas que no dependan de personas específicas.</div>
+          <span class="module-tag">Meses 1–6 · Coaching 1:1</span>
+        </div>
+        <div class="module-card">
+          <div class="module-num">M4</div>
+          <div class="module-title">Mentoría inversa senior-junior</div>
+          <div class="module-body">Pares multigeneracionales con encuentros quincenales estructurados. El perfil senior enseña negocio, criterio y relaciones; el perfil junior enseña herramientas digitales, análisis de datos y perspectiva del consumidor actual. Ambos ganan.</div>
+          <span class="module-tag">Meses 4–12 · Programa continuo</span>
+        </div>
+      </div>
+
+      <div class="impact-strip">
+        <div class="impact-cell">
+          <div class="impact-num">+2.0</div>
+          <div class="impact-label">Puntos esperados de mejora en Dirección General</div>
+        </div>
+        <div class="impact-cell">
+          <div class="impact-num">12</div>
+          <div class="impact-label">Meses de duración del programa completo</div>
+        </div>
+        <div class="impact-cell">
+          <div class="impact-num">5</div>
+          <div class="impact-label">Competencias de la marca de liderazgo PC</div>
+        </div>
+        <div class="impact-cell">
+          <div class="impact-num">∞</div>
+          <div class="impact-label">Liderazgo que funciona sin depender de una persona</div>
+        </div>
+      </div>
+
+      <!-- TIMELINE -->
+      <p style="font-size:12px;font-weight:500;text-transform:uppercase;letter-spacing:.08em;color:var(--gray-400);margin:2rem 0 .75rem">Hoja de ruta de implementación</p>
+      <div class="timeline-row">
+        <div class="timeline-step">
+          <div class="t-month">Mes 1–2</div>
+          <div class="t-title">Diagnóstico y co-diseño</div>
+          <div class="t-body">Talleres de co-creación de la marca de liderazgo PC con directores y mandos medios seleccionados</div>
+        </div>
+        <div class="timeline-step">
+          <div class="t-month">Mes 3–4</div>
+          <div class="t-title">Lanzamiento y primeras cohortes</div>
+          <div class="t-body">Inicio del programa de habilitación de líderes de célula y arranque del coaching ejecutivo al equipo directivo</div>
+        </div>
+        <div class="timeline-step">
+          <div class="t-month">Mes 5–7</div>
+          <div class="t-title">Práctica y primeras victorias</div>
+          <div class="t-body">Primeras células con autonomía real. Documentación de victorias tempranas para construir confianza en el modelo</div>
+        </div>
+        <div class="timeline-step">
+          <div class="t-month">Mes 8–10</div>
+          <div class="t-title">Evaluación intermedia</div>
+          <div class="t-body">Segunda encuesta de liderazgo para medir avance en las dimensiones objetivo. Ajuste del programa según resultados</div>
+        </div>
+        <div class="timeline-step">
+          <div class="t-month">Mes 11–12</div>
+          <div class="t-title">Consolidación e institucionalización</div>
+          <div class="t-body">La marca de liderazgo PC queda integrada en los procesos de evaluación, promoción y desarrollo de talento de la empresa</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-brand"><svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:inline-block;vertical-align:middle;margin-right:8px">
+  <rect width="32" height="32" rx="6" fill="#1A6BE8"/>
+  <path d="M8 8h7c2.8 0 4.5 1.8 4.5 4.2 0 2.4-1.7 4.2-4.5 4.2H11v5.6H8V8zm3 2.4v3.6h3.8c1.2 0 1.9-.7 1.9-1.8 0-1.1-.7-1.8-1.9-1.8H11z" fill="white"/>
+  <path d="M20 8h3.5c3 0 5.5 2.4 5.5 6s-2.5 6-5.5 6H20V8zm3 2.4v7.2h.5c1.7 0 2.8-1.3 2.8-3.6s-1.1-3.6-2.8-3.6H23z" fill="rgba(255,255,255,0.7)"/>
+</svg><span style="font-family:var(--serif);font-size:15px;font-weight:600;color:var(--black)">Precise <span style="color:#1A6BE8">Choice</span></span> 2026</div>
+  <nav class="footer-nav">
+    <a href="06-liderazgo.html">← Liderazgo</a>
+    <a href="08-justificacion.html">Siguiente: Justificación →</a>
+  </nav>
+</footer>
+<script>
+  const obs=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')}),{threshold:.06});
+  document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>

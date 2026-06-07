@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta http-equiv="Content-Security-Policy" content="frame-ancestors *;">
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Estrategia — Precise Choice MOE</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root{--black:#0F0F0F;--white:#FAFAFA;--orange:#1A6BE8;--orange-light:#EBF1FD;--gray-100:#F5F5F5;--gray-200:#E8E8E8;--gray-400:#9E9E9E;--gray-600:#616161;--gray-800:#2E2E2E;--serif:'Playfair Display',Georgia,serif;--sans:'DM Sans',system-ui,sans-serif}
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:var(--sans);background:var(--white);color:var(--black);line-height:1.6;overflow-x:hidden}
+  nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(250,250,250,0.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--gray-200);padding:0 2rem;height:60px;display:flex;align-items:center;justify-content:space-between}
+  .nav-logo{font-family:var(--serif);font-size:15px;font-weight:600;color:var(--black);text-decoration:none}.nav-logo span{color:var(--orange)}
+  .nav-back{font-size:13px;color:var(--gray-600);text-decoration:none;display:flex;align-items:center;gap:6px;transition:color .2s}.nav-back:hover{color:var(--orange)}
+  .page-hero{padding:8rem 2rem 4rem;max-width:1100px;margin:0 auto}
+  .eyebrow{font-size:11px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--orange);margin-bottom:1rem;display:flex;align-items:center;gap:10px}.eyebrow::before{content:'';width:24px;height:1px;background:var(--orange)}
+  .page-title{font-family:var(--serif);font-size:clamp(2.5rem,6vw,5rem);font-weight:700;line-height:1.05;margin-bottom:1.5rem}.page-title em{font-style:italic;color:var(--orange)}
+  .page-intro{font-size:17px;font-weight:300;color:var(--gray-600);max-width:620px;line-height:1.8}
+  .num-badge{font-family:var(--serif);font-size:8rem;font-weight:700;color:var(--gray-200);line-height:1;float:right;margin-left:2rem;margin-top:-1rem}
+  section{padding:4rem 2rem}.container{max-width:1100px;margin:0 auto}
+  .section-label{font-size:11px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--orange);margin-bottom:.75rem}
+  .section-title{font-family:var(--serif);font-size:clamp(1.6rem,3vw,2.4rem);font-weight:600;color:var(--black);margin-bottom:1.25rem;line-height:1.2}
+  .body-text{font-size:15px;font-weight:300;color:var(--gray-600);line-height:1.8;margin-bottom:1.5rem}
+  .alt-section{background:var(--gray-100)}.dark-section{background:var(--black);color:var(--white)}
+  .dark-section .section-title{color:var(--white)}.dark-section .body-text{color:rgba(255,255,255,.6)}
+  .q-block{border-left:3px solid var(--gray-200);padding:1.5rem 2rem;margin-bottom:1.25rem;transition:border-color .2s}
+  .q-block:hover{border-color:var(--orange)}
+  .q-number{font-size:11px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--orange);margin-bottom:.4rem}
+  .q-title{font-size:15px;font-weight:500;color:var(--black);margin-bottom:.5rem}
+  .q-status{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:500;padding:2px 10px;margin-bottom:.6rem}
+  .status-ok{background:#EAF3DE;color:#27500A}.status-warn{background:#E8F0FD;color:#0C3A7A}.status-crit{background:#FAECE7;color:#712B13}
+  .q-actual{font-size:13px;color:var(--gray-600);line-height:1.7;margin-bottom:.6rem}
+  .q-rec{font-size:13px;color:var(--gray-800);line-height:1.7;padding:.75rem 1rem;background:var(--orange-light);border-left:2px solid var(--orange)}
+  .q-rec strong{color:var(--orange)}
+  .roadmap{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1px;background:var(--gray-200);border:1px solid var(--gray-200);margin-top:1.5rem}
+  .roadmap-phase{background:var(--white);padding:2rem 1.5rem}
+  .phase-label{font-size:11px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--orange);margin-bottom:.5rem}
+  .phase-title{font-family:var(--serif);font-size:1.1rem;font-weight:600;color:var(--black);margin-bottom:.75rem}
+  .phase-body{font-size:13px;color:var(--gray-600);line-height:1.65}
+  .reveal{opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .6s ease}.reveal.visible{opacity:1;transform:none}
+  footer{background:var(--white);border-top:1px solid var(--gray-200);padding:1.5rem 2rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem}
+  .footer-brand{font-family:var(--serif);font-size:14px;font-weight:600}.footer-brand span{color:var(--orange)}
+  .footer-nav{display:flex;gap:1.5rem}.footer-nav a{font-size:12px;color:var(--gray-400);text-decoration:none;transition:color .2s}.footer-nav a:hover{color:var(--orange)}
+</style>
+</head>
+<body>
+<nav>
+  <a href="index.html" class="nav-logo"><svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:inline-block;vertical-align:middle;margin-right:8px">
+  <rect width="32" height="32" rx="6" fill="#1A6BE8"/>
+  <path d="M8 8h7c2.8 0 4.5 1.8 4.5 4.2 0 2.4-1.7 4.2-4.5 4.2H11v5.6H8V8zm3 2.4v3.6h3.8c1.2 0 1.9-.7 1.9-1.8 0-1.1-.7-1.8-1.9-1.8H11z" fill="white"/>
+  <path d="M20 8h3.5c3 0 5.5 2.4 5.5 6s-2.5 6-5.5 6H20V8zm3 2.4v7.2h.5c1.7 0 2.8-1.3 2.8-3.6s-1.1-3.6-2.8-3.6H23z" fill="rgba(255,255,255,0.7)"/>
+</svg><span style="font-family:var(--serif);font-size:15px;font-weight:600;color:var(--black)">Precise <span style="color:#1A6BE8">Choice</span></span></a>
+  <a href="index.html" class="nav-back">← Volver al inicio</a>
+</nav>
+<div class="page-hero">
+  <span class="num-badge">02</span>
+  <p class="eyebrow">Elemento MOE · 02</p>
+  <h1 class="page-title">La <em>Estrategia</em><br>de Precise Choice</h1>
+  <p class="page-intro">Evaluación de la claridad estratégica, comunicación de visión y hoja de ruta para los próximos 36 meses, basada en 8 preguntas clave respondidas por la organización.</p>
+</div>
+
+<section class="alt-section">
+  <div class="container">
+    <p class="section-label reveal">Diagnóstico · 8 preguntas estratégicas</p>
+    <h2 class="section-title reveal">Estado actual de la estrategia</h2>
+    <p class="body-text reveal">Las siguientes 8 preguntas — respondidas directamente por Precise Choice — revelan el estado real de su estrategia organizacional y las oportunidades de transformación más urgentes.</p>
+
+    <div class="reveal">
+      <div class="q-block">
+        <div class="q-number">Pregunta 01</div>
+        <div class="q-title">Liderazgo y sucesión institucional</div>
+        <span class="q-status status-warn">⬤ En transición</span>
+        <div class="q-actual"><strong>Situación actual:</strong> Precise Choice preserva fortalezas fundacionales sólidas — cercanía con el cliente, instinto comercial, ética no negociable — pero el liderazgo está centralizado en una o dos personas clave, generando vulnerabilidad operativa.</div>
+        <div class="q-rec"><strong>Recomendación:</strong> Migrar hacia un modelo de liderazgo institucional con derechos de decisión definidos por rol y delegación real a directores.</div>
+      </div>
+
+      <div class="q-block">
+        <div class="q-number">Pregunta 02</div>
+        <div class="q-title">Comunicación y alineación de la visión</div>
+        <span class="q-status status-warn">⬤ Parcialmente efectiva</span>
+        <div class="q-actual"><strong>Situación actual:</strong> La Dirección General comunica la visión en reuniones mensuales generales. Los grandes objetivos son claros (crecer, recuperar participación), pero la visión no llega con suficiente contexto ni narrativa a todos los niveles.</div>
+        <div class="q-rec"><strong>Recomendación:</strong> Diseñar un sistema de cascada estratégica con narrativas diferenciadas por nivel: ejecutivo, mandos medios y colaboradores.</div>
+      </div>
+
+      <div class="q-block">
+        <div class="q-number">Pregunta 03</div>
+        <div class="q-title">Habilitación de mandos medios como facilitadores del cambio</div>
+        <span class="q-status status-crit">⬤ Área crítica</span>
+        <div class="q-actual"><strong>Situación actual:</strong> El acompañamiento a mandos medios ocurre de forma informal, sin un modelo estructurado de desarrollo diferenciado por tipo de rol y nivel de responsabilidad.</div>
+        <div class="q-rec"><strong>Recomendación:</strong> Implementar un programa formal de habilitación con rutas diferenciadas por perfil: operativo, administrativo y estratégico.</div>
+      </div>
+
+      <div class="q-block">
+        <div class="q-number">Pregunta 04</div>
+        <div class="q-title">Colaboración y sinergia entre áreas</div>
+        <span class="q-status status-warn">⬤ En construcción</span>
+        <div class="q-actual"><strong>Situación actual:</strong> Se han formalizado espacios (juntas de Operaciones, comités de Nuevos Productos), pero la calidad de las dinámicas es inconsistente: falta foco, documentación de acuerdos y seguimiento a compromisos.</div>
+        <div class="q-rec"><strong>Recomendación:</strong> Elevar la madurez de los espacios colaborativos con metodología de reuniones efectivas, OKRs por área y tableros de seguimiento compartidos.</div>
+      </div>
+
+      <div class="q-block">
+        <div class="q-number">Pregunta 05</div>
+        <div class="q-title">Adopción de nuevas formas de trabajo</div>
+        <span class="q-status status-warn">⬤ Iniciada, requiere aceleración</span>
+        <div class="q-actual"><strong>Situación actual:</strong> Existe un equipo de Transformación Estratégica activo. Sin embargo, los procesos operan con alta dependencia del conocimiento individual y poca documentación, lo que genera vulnerabilidad ante cambios de personal.</div>
+        <div class="q-rec"><strong>Recomendación:</strong> Priorizar la documentación de procesos críticos e implementar herramientas digitales de gestión del conocimiento institucional.</div>
+      </div>
+
+      <div class="q-block">
+        <div class="q-number">Pregunta 06</div>
+        <div class="q-title">Cultura de escucha y retroalimentación</div>
+        <span class="q-status status-warn">⬤ Buenas intenciones, práctica inconsistente</span>
+        <div class="q-actual"><strong>Situación actual:</strong> Existe política de puertas abiertas y reuniones 1:1 mensuales, pero la retroalimentación no es sistemática ni suficientemente frecuente para generar seguridad psicológica real.</div>
+        <div class="q-rec"><strong>Recomendación:</strong> Adoptar mecanismos de retroalimentación continua (pulsos semanales, check-ins rápidos) y capacitar líderes en escucha activa y conversaciones de desarrollo.</div>
+      </div>
+
+      <div class="q-block">
+        <div class="q-number">Pregunta 07</div>
+        <div class="q-title">Autonomía en la toma de decisiones</div>
+        <span class="q-status status-crit">⬤ Área crítica</span>
+        <div class="q-actual"><strong>Situación actual:</strong> La concentración de decisiones estratégicas y operativas clave genera cuellos de botella que ralentizan la respuesta al mercado, especialmente cuando intervienen varias áreas.</div>
+        <div class="q-rec"><strong>Recomendación:</strong> Diseñar una matriz de autoridad decisional clara (RACI o RAPID) por proceso y nivel jerárquico, acompañada de indicadores confiables y políticas claras.</div>
+      </div>
+
+      <div class="q-block">
+        <div class="q-number">Pregunta 08</div>
+        <div class="q-title">Integración multigeneracional del talento</div>
+        <span class="q-status status-warn">⬤ Oportunidad no capitalizada</span>
+        <div class="q-actual"><strong>Situación actual:</strong> Coexisten perfiles senior con amplio conocimiento del negocio y talento joven con habilidades digitales. La integración es informal y el conocimiento institucional reside en personas, no en sistemas.</div>
+        <div class="q-rec"><strong>Recomendación:</strong> Implementar programas de mentoría inversa y crear equipos de trabajo mixtos en proyectos de innovación para capitalizar ambas perspectivas.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="dark-section">
+  <div class="container">
+    <p class="section-label reveal" style="color:var(--orange)">Hoja de ruta</p>
+    <h2 class="section-title reveal">Plan de implementación estratégica</h2>
+    <p class="body-text reveal">La transformación de Precise Choice se articula en tres fases progresivas que corren en paralelo a medida que la organización gana madurez y confianza.</p>
+    <div class="roadmap reveal">
+      <div class="roadmap-phase">
+        <div class="phase-label">Fase 1 · 0–6 meses</div>
+        <div class="phase-title">Diagnóstico y fundamentos</div>
+        <div class="phase-body">Documentación de procesos críticos, diseño de la matriz decisional RAPID, formación de la coalición guía y comunicación de la urgencia del cambio a todos los niveles de la organización.</div>
+      </div>
+      <div class="roadmap-phase">
+        <div class="phase-label">Fase 2 · 6–18 meses</div>
+        <div class="phase-title">Habilitación y activación</div>
+        <div class="phase-body">Programa formal de mandos medios, cascada de visión estratégica diferenciada por nivel, activación de las primeras células piloto y primeros rituales de reconocimiento y retroalimentación.</div>
+      </div>
+      <div class="roadmap-phase">
+        <div class="phase-label">Fase 3 · 18–36 meses</div>
+        <div class="phase-title">Consolidación cultural</div>
+        <div class="phase-body">Liderazgo institucional consolidado, modelo de innovación sistematizado, alianzas estratégicas activas y una organización que puede operar y crecer sin depender de personas específicas.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-brand"><svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:inline-block;vertical-align:middle;margin-right:8px">
+  <rect width="32" height="32" rx="6" fill="#1A6BE8"/>
+  <path d="M8 8h7c2.8 0 4.5 1.8 4.5 4.2 0 2.4-1.7 4.2-4.5 4.2H11v5.6H8V8zm3 2.4v3.6h3.8c1.2 0 1.9-.7 1.9-1.8 0-1.1-.7-1.8-1.9-1.8H11z" fill="white"/>
+  <path d="M20 8h3.5c3 0 5.5 2.4 5.5 6s-2.5 6-5.5 6H20V8zm3 2.4v7.2h.5c1.7 0 2.8-1.3 2.8-3.6s-1.1-3.6-2.8-3.6H23z" fill="rgba(255,255,255,0.7)"/>
+</svg><span style="font-family:var(--serif);font-size:15px;font-weight:600;color:var(--black)">Precise <span style="color:#1A6BE8">Choice</span></span> 2026</div>
+  <nav class="footer-nav">
+    <a href="01-entorno.html">← Entorno</a>
+    <a href="03-capacidad.html">Siguiente: Capacidad →</a>
+  </nav>
+</footer>
+<script>
+  const obs=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')}),{threshold:.08});
+  document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>

@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta http-equiv="Content-Security-Policy" content="frame-ancestors *;">
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Liderazgo — Precise Choice MOE</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root{--black:#0F0F0F;--white:#FAFAFA;--orange:#1A6BE8;--orange-light:#EBF1FD;--gray-100:#F5F5F5;--gray-200:#E8E8E8;--gray-400:#9E9E9E;--gray-600:#616161;--gray-800:#2E2E2E;--serif:'Playfair Display',Georgia,serif;--sans:'DM Sans',system-ui,sans-serif}
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:var(--sans);background:var(--white);color:var(--black);line-height:1.6;overflow-x:hidden}
+  nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(250,250,250,0.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--gray-200);padding:0 2rem;height:60px;display:flex;align-items:center;justify-content:space-between}
+  .nav-logo{font-family:var(--serif);font-size:15px;font-weight:600;color:var(--black);text-decoration:none}.nav-logo span{color:var(--orange)}
+  .nav-back{font-size:13px;color:var(--gray-600);text-decoration:none;display:flex;align-items:center;gap:6px;transition:color .2s}.nav-back:hover{color:var(--orange)}
+  .page-hero{padding:8rem 2rem 4rem;max-width:1100px;margin:0 auto}
+  .eyebrow{font-size:11px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--orange);margin-bottom:1rem;display:flex;align-items:center;gap:10px}.eyebrow::before{content:'';width:24px;height:1px;background:var(--orange)}
+  .page-title{font-family:var(--serif);font-size:clamp(2.5rem,6vw,5rem);font-weight:700;line-height:1.05;margin-bottom:1.5rem}.page-title em{font-style:italic;color:var(--orange)}
+  .page-intro{font-size:17px;font-weight:300;color:var(--gray-600);max-width:620px;line-height:1.8}
+  .num-badge{font-family:var(--serif);font-size:8rem;font-weight:700;color:var(--gray-200);line-height:1;float:right;margin-left:2rem;margin-top:-1rem}
+  section{padding:4rem 2rem}.container{max-width:1100px;margin:0 auto}
+  .section-label{font-size:11px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--orange);margin-bottom:.75rem}
+  .section-title{font-family:var(--serif);font-size:clamp(1.6rem,3vw,2.4rem);font-weight:600;color:var(--black);margin-bottom:1.25rem;line-height:1.2}
+  .body-text{font-size:15px;font-weight:300;color:var(--gray-600);line-height:1.8;margin-bottom:1.5rem}
+  .alt-section{background:var(--gray-100)}.dark-section{background:var(--black);color:var(--white)}
+  .dark-section .section-title{color:var(--white)}.dark-section .body-text{color:rgba(255,255,255,.6)}
+  .dept-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:1rem;margin-top:1.5rem}
+  .dept-card{padding:1.5rem;text-align:center;border:1px solid var(--gray-200)}
+  .dept-score{font-family:var(--serif);font-size:2.8rem;font-weight:700;margin:.3rem 0 .2rem;line-height:1}
+  .dept-name{font-size:12px;color:var(--gray-600);line-height:1.4;margin-bottom:.6rem}
+  .dept-badge{font-size:11px;font-weight:500;padding:2px 10px;display:inline-block}
+  .d-crit{background:#FAECE7;color:#712B13}.d-ok{background:#EAF3DE;color:#27500A}.d-warn{background:#E8F0FD;color:#0C3A7A}.d-pos{background:#E1F5EE;color:#085041}
+  .dim-list{display:flex;flex-direction:column;gap:.75rem;margin-top:1.5rem}
+  .dim-item{display:grid;grid-template-columns:220px 1fr 60px;gap:1rem;align-items:center;padding:.75rem 0;border-bottom:1px solid var(--gray-200)}
+  .dim-item:last-child{border-bottom:none}
+  .dim-name{font-size:13px;font-weight:500;color:var(--black)}
+  .bar-bg{background:var(--gray-200);height:6px;border-radius:3px}
+  .bar-fill{height:6px;border-radius:3px}
+  .dim-score-num{font-family:var(--serif);font-size:1rem;font-weight:600;text-align:right}
+  .linea-block{margin-bottom:2rem;padding:2rem;border:1px solid var(--gray-200)}
+  .linea-header{display:flex;align-items:flex-start;gap:1.25rem;margin-bottom:1rem}
+  .linea-num{font-family:var(--serif);font-size:2.5rem;font-weight:700;color:var(--orange);line-height:1;flex-shrink:0}
+  .linea-title{font-family:var(--serif);font-size:1.3rem;font-weight:600;color:var(--black);margin-bottom:.3rem}
+  .linea-sub{font-size:13px;color:var(--gray-600);line-height:1.6}
+  .action-list{display:flex;flex-direction:column;gap:.6rem;margin-top:.75rem}
+  .action-item{display:flex;gap:.75rem;align-items:flex-start;font-size:13px;line-height:1.65}
+  .action-dot{width:6px;height:6px;background:var(--orange);border-radius:50%;flex-shrink:0;margin-top:.45rem}
+  .action-text{color:var(--gray-800)}
+  .action-text strong{color:var(--black)}
+  .reveal{opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .6s ease}.reveal.visible{opacity:1;transform:none}
+  footer{background:var(--white);border-top:1px solid var(--gray-200);padding:1.5rem 2rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem}
+  .footer-brand{font-family:var(--serif);font-size:14px;font-weight:600}.footer-brand span{color:var(--orange)}
+  .footer-nav{display:flex;gap:1.5rem}.footer-nav a{font-size:12px;color:var(--gray-400);text-decoration:none;transition:color .2s}.footer-nav a:hover{color:var(--orange)}
+  @media(max-width:640px){.dim-item{grid-template-columns:1fr;gap:.4rem}.dim-score-num{text-align:left}}
+</style>
+</head>
+<body>
+<nav>
+  <a href="index.html" class="nav-logo"><svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:inline-block;vertical-align:middle;margin-right:8px">
+  <rect width="32" height="32" rx="6" fill="#1A6BE8"/>
+  <path d="M8 8h7c2.8 0 4.5 1.8 4.5 4.2 0 2.4-1.7 4.2-4.5 4.2H11v5.6H8V8zm3 2.4v3.6h3.8c1.2 0 1.9-.7 1.9-1.8 0-1.1-.7-1.8-1.9-1.8H11z" fill="white"/>
+  <path d="M20 8h3.5c3 0 5.5 2.4 5.5 6s-2.5 6-5.5 6H20V8zm3 2.4v7.2h.5c1.7 0 2.8-1.3 2.8-3.6s-1.1-3.6-2.8-3.6H23z" fill="rgba(255,255,255,0.7)"/>
+</svg><span style="font-family:var(--serif);font-size:15px;font-weight:600;color:var(--black)">Precise <span style="color:#1A6BE8">Choice</span></span></a>
+  <a href="index.html" class="nav-back">← Volver al inicio</a>
+</nav>
+<div class="page-hero">
+  <span class="num-badge">06</span>
+  <p class="eyebrow">Elemento MOE · 06</p>
+  <h1 class="page-title">El <em>Liderazgo</em><br>en números</h1>
+  <p class="page-intro">Resultados de la encuesta de liderazgo transformacional aplicada a 53 colaboradores de Precise Choice, y las dos líneas de acción propuestas para fortalecer el liderazgo en la organización.</p>
+</div>
+
+<section class="alt-section">
+  <div class="container">
+    <p class="section-label reveal">Encuesta · 53 respuestas · Escala 1–5</p>
+    <h2 class="section-title reveal">Resultado general: 3.64 / 5.0</h2>
+    <p class="body-text reveal">El liderazgo en Precise Choice se ubica en un nivel moderado-positivo. Sin embargo, existe una brecha crítica en la Dirección General — los colaboradores más cercanos al liderazgo fundacional son quienes menos perciben liderazgo transformacional. Esta brecha, al estar en la cúspide, se multiplica hacia abajo.</p>
+    <div class="dept-grid reveal">
+      <div class="dept-card" style="border-color:#E24B4A">
+        <div class="dept-name">Dirección General</div>
+        <div class="dept-score" style="color:#A32D2D">2.52</div>
+        <div class="dept-badge d-crit">Área crítica</div>
+        <p style="font-size:11px;color:var(--gray-400);margin-top:.4rem">n = 8</p>
+      </div>
+      <div class="dept-card" style="border-color:#1D9E75">
+        <div class="dept-name">Dirección de Marketing</div>
+        <div class="dept-score" style="color:#085041">4.66</div>
+        <div class="dept-badge d-ok">Liderazgo modelo</div>
+        <p style="font-size:11px;color:var(--gray-400);margin-top:.4rem">n = 7</p>
+      </div>
+      <div class="dept-card">
+        <div class="dept-name">Dirección Comercial</div>
+        <div class="dept-score" style="color:#0C3A7A">3.56</div>
+        <div class="dept-badge d-warn">En desarrollo</div>
+        <p style="font-size:11px;color:var(--gray-400);margin-top:.4rem">n = 9</p>
+      </div>
+      <div class="dept-card">
+        <div class="dept-name">Dirección de Operaciones</div>
+        <div class="dept-score" style="color:#0F6E56">3.74</div>
+        <div class="dept-badge d-pos">Positivo</div>
+        <p style="font-size:11px;color:var(--gray-400);margin-top:.4rem">n = 29</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <p class="section-label reveal">7 dimensiones evaluadas</p>
+    <h2 class="section-title reveal">Resultados por dimensión</h2>
+    <div class="dim-list reveal">
+      <div class="dim-item">
+        <div class="dim-name">Sensibilidad personal</div>
+        <div class="bar-bg"><div class="bar-fill" style="width:78.6%;background:#1D9E75"></div></div>
+        <div class="dim-score-num" style="color:#1D9E75">3.93</div>
+      </div>
+      <div class="dim-item">
+        <div class="dim-name">Modelar con el ejemplo</div>
+        <div class="bar-bg"><div class="bar-fill" style="width:74%;background:#5DCAA5"></div></div>
+        <div class="dim-score-num" style="color:#5DCAA5">3.70</div>
+      </div>
+      <div class="dim-item">
+        <div class="dim-name">Alto rendimiento</div>
+        <div class="bar-bg"><div class="bar-fill" style="width:73%;background:#5DCAA5"></div></div>
+        <div class="dim-score-num" style="color:#5DCAA5">3.65</div>
+      </div>
+      <div class="dim-item">
+        <div class="dim-name">Trabajo en equipo</div>
+        <div class="bar-bg"><div class="bar-fill" style="width:72.8%;background:#EF9F27"></div></div>
+        <div class="dim-score-num" style="color:#EF9F27">3.64</div>
+      </div>
+      <div class="dim-item">
+        <div class="dim-name">Pensamiento innovador</div>
+        <div class="bar-bg"><div class="bar-fill" style="width:71.4%;background:#EF9F27"></div></div>
+        <div class="dim-score-num" style="color:#EF9F27">3.57</div>
+      </div>
+      <div class="dim-item">
+        <div class="dim-name">Visión inspiradora</div>
+        <div class="bar-bg"><div class="bar-fill" style="width:71%;background:#E24B4A"></div></div>
+        <div class="dim-score-num" style="color:#E24B4A">3.55</div>
+      </div>
+      <div class="dim-item" style="border-bottom:2px solid #E24B4A">
+        <div class="dim-name" style="font-weight:600">Reconocimiento</div>
+        <div class="bar-bg"><div class="bar-fill" style="width:70.4%;background:#E24B4A"></div></div>
+        <div class="dim-score-num" style="color:#E24B4A;font-weight:700">3.52</div>
+      </div>
+    </div>
+    <div style="background:var(--orange-light);border-left:3px solid var(--orange);padding:1.25rem 1.5rem;margin-top:1.5rem">
+      <div style="font-size:13px;font-weight:500;color:var(--black);margin-bottom:.3rem">Hallazgo clave</div>
+      <div style="font-size:13px;color:var(--gray-800);line-height:1.7">La <strong>dimensión de Reconocimiento</strong> es la más baja (3.52/5), con las preguntas de celebración en persona (3.34) y felicitar desempeño destacado (3.40) como las peor evaluadas de toda la encuesta. En una transformación organizacional, el reconocimiento es el combustible de la motivación. Sin él, los cambios se perciben como exigencia sin recompensa.</div>
+    </div>
+  </div>
+</section>
+
+<section class="alt-section">
+  <div class="container">
+    <p class="section-label reveal">Propuesta de desarrollo</p>
+    <h2 class="section-title reveal">Dos líneas de acción para el liderazgo</h2>
+    <p class="body-text reveal">Las dos líneas de acción propuestas atienden las dimensiones más bajas de la encuesta y la brecha crítica en la Dirección General, con un enfoque práctico y sostenible.</p>
+
+    <div class="linea-block reveal">
+      <div class="linea-header">
+        <div class="linea-num">1</div>
+        <div>
+          <div class="linea-title">Programa de liderazgo inspirador</div>
+          <div class="linea-sub">Visión, voz y propósito · Atiende: visión inspiradora (3.55), reconocimiento (3.52) y pensamiento innovador (3.57)</div>
+        </div>
+      </div>
+      <div class="action-list">
+        <div class="action-item"><div class="action-dot"></div><div class="action-text"><strong>Talleres de narrativa estratégica:</strong> cada líder aprende a traducir la visión de la empresa en un mensaje propio, auténtico y movilizador para su equipo. Sesiones mensuales de 3 horas durante 6 meses.</div></div>
+        <div class="action-item"><div class="action-dot"></div><div class="action-text"><strong>Sistema de reconocimiento institucional:</strong> diseño de un protocolo de reconocimiento público, personalizado y oportuno con rituales semanales y reconocimiento mensual organizacional. Capacitación en retroalimentación positiva efectiva.</div></div>
+        <div class="action-item"><div class="action-dot"></div><div class="action-text"><strong>Retos de innovación guiada:</strong> cada célula propone mensualmente una mejora a un proceso o producto existente. Los líderes aprenden a facilitar el pensamiento divergente sin bloquear ideas.</div></div>
+        <div class="action-item"><div class="action-dot"></div><div class="action-text"><strong>Benchmark interno con Marketing (4.66/5):</strong> la Dirección de Marketing actúa como comunidad de práctica que comparte sus dinámicas de liderazgo con otras áreas. El modelo ya existe dentro de la empresa.</div></div>
+      </div>
+    </div>
+
+    <div class="linea-block reveal">
+      <div class="linea-header">
+        <div class="linea-num">2</div>
+        <div>
+          <div class="linea-title">Programa de liderazgo institucional</div>
+          <div class="linea-sub">Autonomía, decisión y marca compartida · Atiende: brecha Dirección General (2.52/5) y dependencia del modelo personalista</div>
+        </div>
+      </div>
+      <div class="action-list">
+        <div class="action-item"><div class="action-dot"></div><div class="action-text"><strong>Definición de la marca de liderazgo PC:</strong> co-creación con directores y mandos medios de las 5 competencias del líder Precise Choice: orientación al cliente, decisión ágil, desarrollo de talento, comunicación inspiradora e integridad. Cada competencia tiene comportamientos observables.</div></div>
+        <div class="action-item"><div class="action-dot"></div><div class="action-text"><strong>Programa de habilitación de líderes de célula:</strong> formación modular de 12 meses para mandos medios que liderarán las células. Incluye toma de decisiones autónoma, gestión de conversaciones difíciles, OKRs y coaching de equipos.</div></div>
+        <div class="action-item"><div class="action-dot"></div><div class="action-text"><strong>Coaching ejecutivo para la Dirección General:</strong> acompañamiento individual de 6–12 meses enfocado en delegación real, comunicación de visión y construcción de sistemas de liderazgo que no dependan de personas específicas.</div></div>
+        <div class="action-item"><div class="action-dot"></div><div class="action-text"><strong>Mentoría inversa senior-junior:</strong> pares multigeneracionales con encuentros quincenales estructurados. El senior enseña negocio y criterio; el junior enseña herramientas digitales y nuevas perspectivas.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-brand"><svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:inline-block;vertical-align:middle;margin-right:8px">
+  <rect width="32" height="32" rx="6" fill="#1A6BE8"/>
+  <path d="M8 8h7c2.8 0 4.5 1.8 4.5 4.2 0 2.4-1.7 4.2-4.5 4.2H11v5.6H8V8zm3 2.4v3.6h3.8c1.2 0 1.9-.7 1.9-1.8 0-1.1-.7-1.8-1.9-1.8H11z" fill="white"/>
+  <path d="M20 8h3.5c3 0 5.5 2.4 5.5 6s-2.5 6-5.5 6H20V8zm3 2.4v7.2h.5c1.7 0 2.8-1.3 2.8-3.6s-1.1-3.6-2.8-3.6H23z" fill="rgba(255,255,255,0.7)"/>
+</svg><span style="font-family:var(--serif);font-size:15px;font-weight:600;color:var(--black)">Precise <span style="color:#1A6BE8">Choice</span></span> 2026</div>
+  <nav class="footer-nav">
+    <a href="05-gobernanza.html">← Gobernanza</a>
+    <a href="index.html">↑ Inicio</a>
+  </nav>
+</footer>
+<script>
+  const obs=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')}),{threshold:.08});
+  document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>

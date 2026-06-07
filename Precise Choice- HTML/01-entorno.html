@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta http-equiv="Content-Security-Policy" content="frame-ancestors *;">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Entorno — Precise Choice MOE</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black:#0F0F0F;--white:#FAFAFA;--orange:#1A6BE8;--orange-light:#EBF1FD;
+    --gray-100:#F5F5F5;--gray-200:#E8E8E8;--gray-400:#9E9E9E;--gray-600:#616161;--gray-800:#2E2E2E;
+    --serif:'Playfair Display',Georgia,serif;--sans:'DM Sans',system-ui,sans-serif;
+  }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:var(--sans);background:var(--white);color:var(--black);line-height:1.6;overflow-x:hidden}
+  nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(250,250,250,0.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--gray-200);padding:0 2rem;height:60px;display:flex;align-items:center;justify-content:space-between}
+  .nav-logo{font-family:var(--serif);font-size:15px;font-weight:600;color:var(--black);text-decoration:none}
+  .nav-logo span{color:var(--orange)}
+  .nav-back{font-size:13px;color:var(--gray-600);text-decoration:none;display:flex;align-items:center;gap:6px;transition:color .2s}
+  .nav-back:hover{color:var(--orange)}
+  .page-hero{padding:8rem 2rem 4rem;max-width:1100px;margin:0 auto}
+  .eyebrow{font-size:11px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--orange);margin-bottom:1rem;display:flex;align-items:center;gap:10px}
+  .eyebrow::before{content:'';width:24px;height:1px;background:var(--orange)}
+  .page-title{font-family:var(--serif);font-size:clamp(2.5rem,6vw,5rem);font-weight:700;line-height:1.05;margin-bottom:1.5rem}
+  .page-title em{font-style:italic;color:var(--orange)}
+  .page-intro{font-size:17px;font-weight:300;color:var(--gray-600);max-width:620px;line-height:1.8;margin-bottom:2rem}
+  .num-badge{font-family:var(--serif);font-size:8rem;font-weight:700;color:var(--gray-200);line-height:1;float:right;margin-left:2rem;margin-top:-1rem}
+  section{padding:4rem 2rem}
+  .container{max-width:1100px;margin:0 auto}
+  .section-label{font-size:11px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--orange);margin-bottom:.75rem}
+  .section-title{font-family:var(--serif);font-size:clamp(1.6rem,3vw,2.4rem);font-weight:600;color:var(--black);margin-bottom:1.25rem;line-height:1.2}
+  .body-text{font-size:15px;font-weight:300;color:var(--gray-600);line-height:1.8;margin-bottom:1.5rem}
+  .card{background:var(--white);border:1px solid var(--gray-200);padding:1.75rem 2rem;margin-bottom:1rem}
+  .card-title{font-size:14px;font-weight:500;color:var(--black);margin-bottom:.5rem}
+  .card-body{font-size:13px;color:var(--gray-600);line-height:1.7}
+  .highlight-card{background:var(--orange-light);border:none;border-left:3px solid var(--orange);padding:1.75rem 2rem;margin-bottom:1rem}
+  .grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1rem;margin-top:1.5rem}
+  .grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;margin-top:1.5rem}
+  .tag-grid{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1rem}
+  .tag{font-size:12px;font-weight:500;padding:4px 12px;border:1px solid var(--gray-200);color:var(--gray-800)}
+  .tag-orange{background:var(--orange-light);border-color:var(--orange);color:var(--orange)}
+  .alt-section{background:var(--gray-100)}
+  .dark-section{background:var(--black);color:var(--white)}
+  .dark-section .section-title{color:var(--white)}
+  .dark-section .body-text{color:rgba(255,255,255,.6)}
+  .dark-section .card{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.1)}
+  .dark-section .card-title{color:var(--white)}
+  .dark-section .card-body{color:rgba(255,255,255,.55)}
+  .divider{border:none;border-top:1px solid var(--gray-200);margin:2rem 0}
+  .reveal{opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .6s ease}
+  .reveal.visible{opacity:1;transform:none}
+  footer{background:var(--white);border-top:1px solid var(--gray-200);padding:1.5rem 2rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem}
+  .footer-brand{font-family:var(--serif);font-size:14px;font-weight:600}.footer-brand span{color:var(--orange)}
+  .footer-nav{display:flex;gap:1.5rem}
+  .footer-nav a{font-size:12px;color:var(--gray-400);text-decoration:none;transition:color .2s}
+  .footer-nav a:hover{color:var(--orange)}
+</style>
+</head>
+<body>
+<nav>
+  <a href="index.html" class="nav-logo"><svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:inline-block;vertical-align:middle;margin-right:8px">
+  <rect width="32" height="32" rx="6" fill="#1A6BE8"/>
+  <path d="M8 8h7c2.8 0 4.5 1.8 4.5 4.2 0 2.4-1.7 4.2-4.5 4.2H11v5.6H8V8zm3 2.4v3.6h3.8c1.2 0 1.9-.7 1.9-1.8 0-1.1-.7-1.8-1.9-1.8H11z" fill="white"/>
+  <path d="M20 8h3.5c3 0 5.5 2.4 5.5 6s-2.5 6-5.5 6H20V8zm3 2.4v7.2h.5c1.7 0 2.8-1.3 2.8-3.6s-1.1-3.6-2.8-3.6H23z" fill="rgba(255,255,255,0.7)"/>
+</svg><span style="font-family:var(--serif);font-size:15px;font-weight:600;color:var(--black)">Precise <span style="color:#1A6BE8">Choice</span></span></a>
+  <a href="index.html" class="nav-back">← Volver al inicio</a>
+</nav>
+
+<div class="page-hero">
+  <span class="num-badge">01</span>
+  <p class="eyebrow">Elemento MOE · 01</p>
+  <h1 class="page-title">El <em>Entorno</em><br>de Precise Choice</h1>
+  <p class="page-intro">Cómo la empresa entiende y anticipa las condiciones cambiantes de su mercado, y qué debe transformarse en su lectura estratégica del entorno.</p>
+</div>
+
+<section class="alt-section">
+  <div class="container">
+    <p class="section-label reveal">Situación actual</p>
+    <h2 class="section-title reveal">¿Cómo lee Precise Choice su entorno?</h2>
+    <p class="body-text reveal">Precise Choice tiene más de 30 años leyendo el mercado de tecnología de consumo. Su comprensión del entorno externo se refleja en su expansión de catálogo hacia inteligencia artificial, Smart Home, gaming (Vortred), wearables y Precise Choice Kids — anticipando tendencias globales de conectividad y digitalización del hogar.</p>
+    <p class="body-text reveal">Sin embargo, esta lectura es <strong>intuitiva y poco sistematizada</strong>: depende del criterio y experiencia del equipo fundacional, no de procesos formales de inteligencia de mercado. Esto genera una vulnerabilidad: cuando el entorno cambia con rapidez — como lo hace hoy con la irrupción de la IA y los modelos D2C — la empresa puede quedar rezagada si no institucionaliza su capacidad de detección.</p>
+    <div class="highlight-card reveal">
+      <div class="card-title">El hallazgo más relevante</div>
+      <div class="card-body">La empresa reconoce que su mayor vulnerabilidad no es el entorno externo, sino el entorno interno: liderazgo centralizado, silos operativos y procesos dependientes de personas clave son el freno real para responder con agilidad al mercado externo.</div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <p class="section-label reveal">Entorno externo</p>
+    <h2 class="section-title reveal">Factores críticos del mercado</h2>
+    <p class="body-text reveal">Estos son los factores del entorno externo que impactan directamente a Precise Choice y que deben integrarse en su proceso de planificación estratégica:</p>
+    <div class="grid3 reveal">
+      <div class="card">
+        <div class="card-title">Competencia asiática de bajo costo</div>
+        <div class="card-body">Marcas como Xiaomi, Anker y fabricantes genéricos chinos presionan los márgenes en categorías de acceso. La diferenciación por calidad y garantía es la respuesta de PC.</div>
+      </div>
+      <div class="card">
+        <div class="card-title">Aceleración de la IA en productos</div>
+        <div class="card-body">La IA generativa está redefiniendo los periféricos y accesorios. Precise Choice ya incursiona con su línea IA, pero requiere un proceso más ágil de innovación de producto.</div>
+      </div>
+      <div class="card">
+        <div class="card-title">Auge del e-commerce y D2C</div>
+        <div class="card-body">El consumidor compra cada vez más de forma directa. La ausencia de un canal D2C robusto es una brecha estratégica que le cuesta a PC datos del consumidor y margen.</div>
+      </div>
+      <div class="card">
+        <div class="card-title">Consumidor más exigente y digitalizado</div>
+        <div class="card-body">Las reseñas, el NPS y la experiencia postventa definen la reputación de marca en tiempo real. PC tiene garantías robustas pero no sistematiza esta voz del cliente.</div>
+      </div>
+      <div class="card">
+        <div class="card-title">Nearshoring — ventaja mexicana</div>
+        <div class="card-body">México es protagonista del nearshoring. PC tiene una oportunidad única de posicionarse como el proveedor tecnológico de confianza para empresas que llegan al país.</div>
+      </div>
+      <div class="card">
+        <div class="card-title">Ciclos de producto más cortos</div>
+        <div class="card-body">El tiempo entre tendencia y obsolescencia se acorta. La capacidad de lanzar productos en menos tiempo es una ventaja competitiva crítica para el ecosistema MOE.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="dark-section">
+  <div class="container">
+    <p class="section-label reveal" style="color:var(--orange)">Recomendación estratégica</p>
+    <h2 class="section-title reveal">¿Cómo debe cambiar la estrategia de entorno?</h2>
+    <p class="body-text reveal">Precise Choice debe evolucionar de una lectura intuitiva del entorno a un proceso formal y continuo de inteligencia de mercado. La clave es pasar de <em>reaccionar</em> al entorno a <em>anticiparlo</em>.</p>
+    <div class="grid2 reveal">
+      <div class="card">
+        <div class="card-title">Crear una función de market sensing</div>
+        <div class="card-body">Designar un rol o equipo responsable de monitorear sistemáticamente tendencias tecnológicas, movimientos competitivos y comportamiento del consumidor final — y traducir esa información en decisiones estratégicas.</div>
+      </div>
+      <div class="card">
+        <div class="card-title">Integrar inteligencia al ciclo estratégico</div>
+        <div class="card-body">El análisis del entorno debe alimentar trimestralmente la revisión estratégica de la empresa, no solo ocurrir en la planeación anual o cuando surge una crisis de mercado.</div>
+      </div>
+      <div class="card">
+        <div class="card-title">Sistematizar la voz del cliente</div>
+        <div class="card-body">NPS, reseñas digitales, datos de postventa y retroalimentación de distribuidores deben convertirse en insumos formales de los comités de Nuevos Productos y de la estrategia comercial.</div>
+      </div>
+      <div class="card">
+        <div class="card-title">Construir el canal D2C</div>
+        <div class="card-body">Establecer alianzas con Amazon MX y MercadoLibre como primer paso, mientras se desarrolla una estrategia de datos propia que permita conocer al consumidor final directamente.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-brand"><svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:inline-block;vertical-align:middle;margin-right:8px">
+  <rect width="32" height="32" rx="6" fill="#1A6BE8"/>
+  <path d="M8 8h7c2.8 0 4.5 1.8 4.5 4.2 0 2.4-1.7 4.2-4.5 4.2H11v5.6H8V8zm3 2.4v3.6h3.8c1.2 0 1.9-.7 1.9-1.8 0-1.1-.7-1.8-1.9-1.8H11z" fill="white"/>
+  <path d="M20 8h3.5c3 0 5.5 2.4 5.5 6s-2.5 6-5.5 6H20V8zm3 2.4v7.2h.5c1.7 0 2.8-1.3 2.8-3.6s-1.1-3.6-2.8-3.6H23z" fill="rgba(255,255,255,0.7)"/>
+</svg><span style="font-family:var(--serif);font-size:15px;font-weight:600;color:var(--black)">Precise <span style="color:#1A6BE8">Choice</span></span> 2026</div>
+  <nav class="footer-nav">
+    <a href="index.html">Inicio</a>
+    <a href="02-estrategia.html">Siguiente: Estrategia →</a>
+  </nav>
+</footer>
+
+<script>
+  const obs=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')}),{threshold:.1});
+  document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>
